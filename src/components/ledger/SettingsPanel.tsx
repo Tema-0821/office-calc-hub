@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { DateField } from "@/components/calculators/DateField";
 import { NumberField } from "@/components/calculators/NumberField";
-import { formatWon } from "@/lib/format";
+import { formatWon, formatWonKorean } from "@/lib/format";
 import type { FixedExpense, LedgerSettings } from "@/lib/ledger/types";
 
 interface SettingsPanelProps {
@@ -91,21 +91,28 @@ export function SettingsPanel({
           )}
         </div>
 
-        <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+        <div className="mt-3 flex flex-col items-start gap-2 sm:flex-row">
           <input
             type="text"
             placeholder="예: 월세"
             value={newExpenseName}
             onChange={(e) => setNewExpenseName(e.target.value)}
-            className="flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900"
+            className="w-full flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900"
           />
-          <input
-            type="number"
-            placeholder="금액"
-            value={newExpenseAmount || ""}
-            onChange={(e) => setNewExpenseAmount(Number(e.target.value))}
-            className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-right text-sm tabular-nums focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 sm:w-32"
-          />
+          <div className="flex w-full flex-col gap-1 sm:w-32">
+            <input
+              type="number"
+              placeholder="금액"
+              value={newExpenseAmount || ""}
+              onChange={(e) => setNewExpenseAmount(Number(e.target.value))}
+              className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-right text-sm tabular-nums focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900"
+            />
+            {newExpenseAmount !== 0 && (
+              <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                {formatWonKorean(newExpenseAmount)}
+              </span>
+            )}
+          </div>
           <button
             type="button"
             onClick={handleAddExpense}

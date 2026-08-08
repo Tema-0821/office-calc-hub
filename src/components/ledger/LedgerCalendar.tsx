@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { formatWon } from "@/lib/format";
+import { formatWon, formatWonKorean } from "@/lib/format";
 import { EXPENSE_CATEGORIES, type ExpenseCategory, type Transaction } from "@/lib/ledger/types";
 
 interface LedgerCalendarProps {
@@ -87,14 +87,21 @@ export function LedgerCalendar({ year, month, transactions, onAddTransaction }: 
       {selectedDate && (
         <div className="mt-4 flex flex-col gap-3 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/50">
           <p className="text-sm font-medium">{selectedDate} 지출 추가</p>
-          <div className="flex flex-col gap-2 sm:flex-row">
-            <input
-              type="number"
-              placeholder="금액"
-              value={amount || ""}
-              onChange={(e) => setAmount(Number(e.target.value))}
-              className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-right text-sm tabular-nums focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 sm:w-32"
-            />
+          <div className="flex flex-col items-start gap-2 sm:flex-row">
+            <div className="flex w-full flex-col gap-1 sm:w-32">
+              <input
+                type="number"
+                placeholder="금액"
+                value={amount || ""}
+                onChange={(e) => setAmount(Number(e.target.value))}
+                className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-right text-sm tabular-nums focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900"
+              />
+              {amount !== 0 && (
+                <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                  {formatWonKorean(amount)}
+                </span>
+              )}
+            </div>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as ExpenseCategory)}
