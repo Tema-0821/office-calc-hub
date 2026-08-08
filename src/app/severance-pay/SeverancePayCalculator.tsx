@@ -5,7 +5,7 @@ import { DateField } from "@/components/calculators/DateField";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultRow } from "@/components/calculators/ResultRow";
 import { calculateSeverancePay } from "@/lib/calculators/severancePay";
-import { formatWon } from "@/lib/format";
+import { formatWonKorean } from "@/lib/format";
 
 function isoDateNMonthsAgo(months: number): string {
   const d = new Date();
@@ -60,8 +60,8 @@ export function SeverancePayCalculator() {
 
       <div className="flex flex-col gap-2 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/50">
         <ResultRow label="재직일수" value={`${result.tenureDays.toLocaleString("ko-KR")}일`} />
-        <ResultRow label="1일 평균임금" value={formatWon(result.dailyAverageWage)} />
-        <ResultRow label="예상 퇴직금" value={formatWon(result.severancePay)} emphasis />
+        <ResultRow label="1일 평균임금" value={formatWonKorean(result.dailyAverageWage)} />
+        <ResultRow label="예상 퇴직금" value={formatWonKorean(result.severancePay)} emphasis />
       </div>
 
       {!result.eligible && (

@@ -1,4 +1,4 @@
-import { formatWon } from "@/lib/format";
+import { formatWonKorean } from "@/lib/format";
 import type { MonthHistoryEntry } from "@/lib/ledger/calculations";
 
 interface CumulativeHistoryTableProps {
@@ -33,10 +33,10 @@ export function CumulativeHistoryTable({ history }: CumulativeHistoryTableProps)
                   }`}
                 >
                   {entry.netChange >= 0 ? "+" : ""}
-                  {formatWon(entry.netChange)}
+                  {formatWonKorean(entry.netChange)}
                 </td>
                 <td className="py-2 text-right font-medium tabular-nums">
-                  {formatWon(entry.cumulativeBalance)}
+                  {formatWonKorean(entry.cumulativeBalance)}
                 </td>
               </tr>
             ))}

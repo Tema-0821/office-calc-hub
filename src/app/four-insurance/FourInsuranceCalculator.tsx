@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultRow } from "@/components/calculators/ResultRow";
 import { calculateFourInsurance, FOUR_INSURANCE_RATES_2026 } from "@/lib/calculators/fourInsurance";
-import { formatWon } from "@/lib/format";
+import { formatWonKorean } from "@/lib/format";
 
 export function FourInsuranceCalculator() {
   const [monthlySalary, setMonthlySalary] = useState(3_000_000);
@@ -22,18 +22,18 @@ export function FourInsuranceCalculator() {
       />
 
       <div className="flex flex-col gap-2 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/50">
-        <ResultRow label="국민연금 (4.75%)" value={formatWon(result.nationalPension)} />
-        <ResultRow label="건강보험 (3.595%)" value={formatWon(result.healthInsurance)} />
-        <ResultRow label="장기요양보험" value={formatWon(result.longTermCare)} />
-        <ResultRow label="고용보험 (0.45%)" value={formatWon(result.employmentInsurance)} />
-        <ResultRow label="공제액 합계" value={formatWon(result.total)} emphasis />
-        <ResultRow label="예상 실수령액 (소득세 제외)" value={formatWon(result.netSalary)} emphasis />
+        <ResultRow label="국민연금 (4.75%)" value={formatWonKorean(result.nationalPension)} />
+        <ResultRow label="건강보험 (3.595%)" value={formatWonKorean(result.healthInsurance)} />
+        <ResultRow label="장기요양보험" value={formatWonKorean(result.longTermCare)} />
+        <ResultRow label="고용보험 (0.45%)" value={formatWonKorean(result.employmentInsurance)} />
+        <ResultRow label="공제액 합계" value={formatWonKorean(result.total)} emphasis />
+        <ResultRow label="예상 실수령액 (소득세 제외)" value={formatWonKorean(result.netSalary)} emphasis />
       </div>
 
       {result.pensionCapped && (
         <p className="text-xs text-amber-600 dark:text-amber-400">
-          ※ 국민연금은 기준소득월액 상한액({formatWon(FOUR_INSURANCE_RATES_2026.nationalPensionIncomeCap)}) 또는
-          하한액({formatWon(FOUR_INSURANCE_RATES_2026.nationalPensionIncomeFloor)}) 기준으로 계산되었습니다.
+          ※ 국민연금은 기준소득월액 상한액({formatWonKorean(FOUR_INSURANCE_RATES_2026.nationalPensionIncomeCap)}) 또는
+          하한액({formatWonKorean(FOUR_INSURANCE_RATES_2026.nationalPensionIncomeFloor)}) 기준으로 계산되었습니다.
         </p>
       )}
 

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultRow } from "@/components/calculators/ResultRow";
 import { calculateWeeklyHolidayPay, MINIMUM_WAGE_2026 } from "@/lib/calculators/weeklyHolidayPay";
-import { formatWon } from "@/lib/format";
+import { formatWonKorean } from "@/lib/format";
 
 export function WeeklyHolidayPayCalculator() {
   const [hourlyWage, setHourlyWage] = useState(MINIMUM_WAGE_2026);
@@ -22,7 +22,7 @@ export function WeeklyHolidayPayCalculator() {
         value={hourlyWage}
         onChange={setHourlyWage}
         suffix="원"
-        helpText={`2026년 최저시급은 ${formatWon(MINIMUM_WAGE_2026)}입니다.`}
+        helpText={`2026년 최저시급은 ${formatWonKorean(MINIMUM_WAGE_2026)}입니다.`}
       />
       <NumberField
         label="주 소정근로시간"
@@ -33,8 +33,8 @@ export function WeeklyHolidayPayCalculator() {
       />
 
       <div className="flex flex-col gap-2 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/50">
-        <ResultRow label="주휴수당 (1주)" value={formatWon(result.weeklyHolidayPay)} />
-        <ResultRow label="월 환산 예상액" value={formatWon(result.monthlyEquivalent)} emphasis />
+        <ResultRow label="주휴수당 (1주)" value={formatWonKorean(result.weeklyHolidayPay)} />
+        <ResultRow label="월 환산 예상액" value={formatWonKorean(result.monthlyEquivalent)} emphasis />
       </div>
 
       {!result.eligible && (

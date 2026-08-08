@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { DateField } from "@/components/calculators/DateField";
 import { NumberField } from "@/components/calculators/NumberField";
-import { formatWon, formatWonKorean } from "@/lib/format";
+import { formatWonKorean } from "@/lib/format";
 import type { FixedExpense, LedgerSettings } from "@/lib/ledger/types";
 
 interface SettingsPanelProps {
@@ -75,7 +75,7 @@ export function SettingsPanel({
             >
               <span>{expense.name}</span>
               <div className="flex items-center gap-3">
-                <span className="tabular-nums">{formatWon(expense.amount)}</span>
+                <span className="tabular-nums">{formatWonKorean(expense.amount)}</span>
                 <button
                   type="button"
                   onClick={() => onRemoveFixedExpense(expense.id)}
@@ -123,7 +123,7 @@ export function SettingsPanel({
         </div>
 
         <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
-          고정지출 합계: {formatWon(fixedTotal)}
+          고정지출 합계: {formatWonKorean(fixedTotal)}
         </p>
       </div>
     </div>

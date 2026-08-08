@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultRow } from "@/components/calculators/ResultRow";
 import { calculateAnnualLeavePay } from "@/lib/calculators/annualLeavePay";
-import { formatWon } from "@/lib/format";
+import { formatWonKorean } from "@/lib/format";
 
 export function AnnualLeavePayCalculator() {
   const [monthlySalary, setMonthlySalary] = useState(3_000_000);
@@ -31,8 +31,8 @@ export function AnnualLeavePayCalculator() {
       />
 
       <div className="flex flex-col gap-2 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/50">
-        <ResultRow label="1일 통상임금" value={formatWon(result.dailyWage)} />
-        <ResultRow label="예상 연차수당" value={formatWon(result.annualLeavePay)} emphasis />
+        <ResultRow label="1일 통상임금" value={formatWonKorean(result.dailyWage)} />
+        <ResultRow label="예상 연차수당" value={formatWonKorean(result.annualLeavePay)} emphasis />
       </div>
 
       <p className="text-xs text-zinc-500 dark:text-zinc-400">

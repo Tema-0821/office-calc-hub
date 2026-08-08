@@ -1,4 +1,4 @@
-import { formatWon } from "@/lib/format";
+import { formatWonKorean } from "@/lib/format";
 import { EXPENSE_CATEGORIES, type Transaction } from "@/lib/ledger/types";
 
 interface TransactionListProps {
@@ -28,7 +28,7 @@ export function TransactionList({ transactions, onRemove }: TransactionListProps
               {tx.memo && <span className="text-xs text-zinc-500 dark:text-zinc-400">{tx.memo}</span>}
             </div>
             <div className="flex items-center gap-3">
-              <span className="tabular-nums">{formatWon(tx.amount)}</span>
+              <span className="tabular-nums">{formatWonKorean(tx.amount)}</span>
               <button
                 type="button"
                 onClick={() => onRemove(tx.id)}

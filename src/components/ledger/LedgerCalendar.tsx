@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { formatWon, formatWonKorean } from "@/lib/format";
+import { formatWonKorean } from "@/lib/format";
 import { EXPENSE_CATEGORIES, type ExpenseCategory, type Transaction } from "@/lib/ledger/types";
 
 interface LedgerCalendarProps {
@@ -77,7 +77,7 @@ export function LedgerCalendar({ year, month, transactions, onAddTransaction }: 
             >
               <span className="text-zinc-700 dark:text-zinc-300">{day}</span>
               {total ? (
-                <span className="text-[10px] tabular-nums text-red-500">-{formatWon(total)}</span>
+                <span className="text-[10px] tabular-nums text-red-500">-{formatWonKorean(total)}</span>
               ) : null}
             </button>
           );

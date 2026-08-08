@@ -12,7 +12,21 @@ import {
   getMonthSummary,
   getNextMonthProjection,
 } from "@/lib/ledger/calculations";
+import { formatWonKorean } from "@/lib/format";
 import { useLedger } from "@/lib/ledger/useLedger";
+
+function getAdjacentMonth(year: number, month: number, offset: 1 | -1) {
+  let nextMonth = month + offset;
+  let nextYear = year;
+  if (nextMonth > 12) {
+    nextMonth = 1;
+    nextYear += 1;
+  } else if (nextMonth < 1) {
+    nextMonth = 12;
+    nextYear -= 1;
+  }
+  return { year: nextYear, month: nextMonth };
+}
 
 export function BalanceSimulator() {
   const ledger = useLedger();
@@ -31,6 +45,12 @@ export function BalanceSimulator() {
   const projection = useMemo(
     () => getNextMonthProjection(ledger.data, viewYear, viewMonth),
     [ledger.data, viewYear, viewMonth]
+  );
+
+  const prevMonth = getAdjacentMonth(viewYear, viewMonth, -1);
+  const prevSummary = useMemo(
+    () => getMonthSummary(ledger.data, prevMonth.year, prevMonth.month),
+    [ledger.data, prevMonth.year, prevMonth.month]
   );
 
   const monthTransactions = useMemo(
@@ -79,9 +99,19 @@ export function BalanceSimulator() {
         <button
           type="button"
           onClick={goPrevMonth}
-          className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          className="flex flex-col items-start gap-0.5 rounded-lg border border-zinc-300 px-3 py-1.5 text-left hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
         >
-          ← 이전달
+          <span className="text-sm">← {prevMonth.month}월</span>
+          <span
+            className={`text-xs tabular-nums ${
+              prevSummary.netChange >= 0
+                ? "text-emerald-600 dark:text-emerald-400"
+                : "text-red-500"
+            }`}
+          >
+            {prevSummary.netChange >= 0 ? "+" : ""}
+            {formatWonKorean(prevSummary.netChange)}
+          </span>
         </button>
         <h2 className="text-lg font-bold">
           {viewYear}년 {viewMonth}월
@@ -89,9 +119,19 @@ export function BalanceSimulator() {
         <button
           type="button"
           onClick={goNextMonth}
-          className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          className="flex flex-col items-end gap-0.5 rounded-lg border border-zinc-300 px-3 py-1.5 text-right hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
         >
-          다음달 →
+          <span className="text-sm">{projection.nextMonth}월 →</span>
+          <span
+            className={`text-xs tabular-nums ${
+              projection.projectedNetChange >= 0
+                ? "text-emerald-600 dark:text-emerald-400"
+                : "text-red-500"
+            }`}
+          >
+            {projection.projectedNetChange >= 0 ? "+" : ""}
+            {formatWonKorean(projection.projectedNetChange)} (예상)
+          </span>
         </button>
       </div>
 
