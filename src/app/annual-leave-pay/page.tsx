@@ -12,6 +12,7 @@ export default function Page() {
     <CalculatorLayout
       title="연차수당 계산기"
       description="월급(통상임금)과 미사용 연차일수로 연차수당을 계산합니다."
+      accent="emerald"
       guide={
         <>
           <p>

@@ -13,6 +13,7 @@ export default function Page() {
     <CalculatorLayout
       title="퇴직금 계산기"
       description="입사일·퇴사일과 최근 3개월 급여로 평균임금 기준 예상 퇴직금을 계산합니다."
+      accent="violet"
       guide={
         <>
           <p>

@@ -13,6 +13,7 @@ export default function Page() {
     <CalculatorLayout
       title="잔고 시뮬레이터"
       description="월급, 고정지출, 그날그날의 지출을 기록하면 매달 잔고가 얼마나 쌓이는지 보여줍니다."
+      accent="rose"
       bare
       guide={
         <>

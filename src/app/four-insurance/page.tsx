@@ -13,6 +13,7 @@ export default function Page() {
     <CalculatorLayout
       title="4대보험료 계산기"
       description="2026년 기준 요율로 월급에서 공제되는 4대보험 근로자 부담분을 계산합니다."
+      accent="blue"
       guide={
         <>
           <p>

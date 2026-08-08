@@ -12,6 +12,7 @@ export default function Page() {
     <CalculatorLayout
       title="주휴수당 계산기"
       description="시급과 주 소정근로시간으로 주휴수당 지급 대상 여부와 금액을 계산합니다."
+      accent="amber"
       guide={
         <>
           <p>
