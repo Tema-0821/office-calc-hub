@@ -35,4 +35,11 @@ export const CALCULATORS: CalculatorMeta[] = [
     description: "월급과 미사용 연차일수로 통상임금 기준 연차수당을 계산해줘요.",
     icon: "🌴",
   },
+  {
+    slug: "balance-simulator",
+    title: "잔고 시뮬레이터 (가계부)",
+    shortTitle: "잔고 시뮬레이터",
+    description: "월급·고정지출·달력 지출 기록으로 매달 잔고가 어떻게 쌓이는지 보여주는 가계부형 도구예요.",
+    icon: "💰",
+  },
 ];
