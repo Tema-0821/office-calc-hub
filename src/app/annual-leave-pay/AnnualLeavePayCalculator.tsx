@@ -1,14 +1,37 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultRow } from "@/components/calculators/ResultRow";
 import { calculateAnnualLeavePay } from "@/lib/calculators/annualLeavePay";
+import { CALCULATOR_INPUT_KEYS } from "@/lib/calculators/storageKeys";
 import { formatWonKorean } from "@/lib/format";
+import { usePersistedState } from "@/lib/storage/usePersistedState";
+
+interface AnnualLeavePayInput {
+  monthlySalary: number;
+  unusedLeaveDays: number;
+}
+
+const DEFAULT_INPUT: AnnualLeavePayInput = {
+  monthlySalary: 3_000_000,
+  unusedLeaveDays: 5,
+};
 
 export function AnnualLeavePayCalculator() {
-  const [monthlySalary, setMonthlySalary] = useState(3_000_000);
-  const [unusedLeaveDays, setUnusedLeaveDays] = useState(5);
+  const [input, setInput] = usePersistedState<AnnualLeavePayInput>(
+    CALCULATOR_INPUT_KEYS.annualLeavePay,
+    DEFAULT_INPUT
+  );
+  const { monthlySalary, unusedLeaveDays } = input;
+
+  function setMonthlySalary(value: number) {
+    setInput((prev) => ({ ...prev, monthlySalary: value }));
+  }
+
+  function setUnusedLeaveDays(value: number) {
+    setInput((prev) => ({ ...prev, unusedLeaveDays: value }));
+  }
 
   const result = useMemo(
     () => calculateAnnualLeavePay(monthlySalary, unusedLeaveDays),

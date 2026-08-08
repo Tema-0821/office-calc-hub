@@ -4,13 +4,17 @@ import { useState } from "react";
 import { DateField } from "@/components/calculators/DateField";
 import { NumberField } from "@/components/calculators/NumberField";
 import { formatWonKorean } from "@/lib/format";
+import type { CalculatorLinkToggles, CalculatorLinksData } from "@/lib/calculatorLinks/types";
 import type { FixedExpense, LedgerSettings } from "@/lib/ledger/types";
+import { CalculatorLinksSection } from "./CalculatorLinksSection";
 
 interface SettingsPanelProps {
   settings: LedgerSettings;
   onUpdateSettings: (patch: Partial<LedgerSettings>) => void;
   onAddFixedExpense: (expense: Omit<FixedExpense, "id">) => void;
   onRemoveFixedExpense: (id: string) => void;
+  calculatorLinkData: CalculatorLinksData;
+  onToggleCalculatorLink: (key: keyof CalculatorLinkToggles, value: boolean) => void;
 }
 
 export function SettingsPanel({
@@ -18,6 +22,8 @@ export function SettingsPanel({
   onUpdateSettings,
   onAddFixedExpense,
   onRemoveFixedExpense,
+  calculatorLinkData,
+  onToggleCalculatorLink,
 }: SettingsPanelProps) {
   const [newExpenseName, setNewExpenseName] = useState("");
   const [newExpenseAmount, setNewExpenseAmount] = useState(0);
@@ -126,6 +132,12 @@ export function SettingsPanel({
           고정지출 합계: {formatWonKorean(fixedTotal)}
         </p>
       </div>
+
+      <CalculatorLinksSection
+        toggles={settings.calculatorLinks}
+        linkData={calculatorLinkData}
+        onToggle={onToggleCalculatorLink}
+      />
     </div>
   );
 }

@@ -1,14 +1,37 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultRow } from "@/components/calculators/ResultRow";
 import { calculateWeeklyHolidayPay, MINIMUM_WAGE_2026 } from "@/lib/calculators/weeklyHolidayPay";
+import { CALCULATOR_INPUT_KEYS } from "@/lib/calculators/storageKeys";
 import { formatWonKorean } from "@/lib/format";
+import { usePersistedState } from "@/lib/storage/usePersistedState";
+
+interface WeeklyHolidayPayInput {
+  hourlyWage: number;
+  weeklyContractHours: number;
+}
+
+const DEFAULT_INPUT: WeeklyHolidayPayInput = {
+  hourlyWage: MINIMUM_WAGE_2026,
+  weeklyContractHours: 40,
+};
 
 export function WeeklyHolidayPayCalculator() {
-  const [hourlyWage, setHourlyWage] = useState(MINIMUM_WAGE_2026);
-  const [weeklyContractHours, setWeeklyContractHours] = useState(40);
+  const [input, setInput] = usePersistedState<WeeklyHolidayPayInput>(
+    CALCULATOR_INPUT_KEYS.weeklyHolidayPay,
+    DEFAULT_INPUT
+  );
+  const { hourlyWage, weeklyContractHours } = input;
+
+  function setHourlyWage(value: number) {
+    setInput((prev) => ({ ...prev, hourlyWage: value }));
+  }
+
+  function setWeeklyContractHours(value: number) {
+    setInput((prev) => ({ ...prev, weeklyContractHours: value }));
+  }
 
   const result = useMemo(
     () => calculateWeeklyHolidayPay(hourlyWage, weeklyContractHours),

@@ -1,11 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { DateField } from "@/components/calculators/DateField";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultRow } from "@/components/calculators/ResultRow";
-import { calculateSeverancePay } from "@/lib/calculators/severancePay";
+import { calculateSeverancePay, type SeverancePayInput } from "@/lib/calculators/severancePay";
+import { CALCULATOR_INPUT_KEYS } from "@/lib/calculators/storageKeys";
 import { formatWonKorean } from "@/lib/format";
+import { usePersistedState } from "@/lib/storage/usePersistedState";
 
 function isoDateNMonthsAgo(months: number): string {
   const d = new Date();
@@ -13,48 +15,56 @@ function isoDateNMonthsAgo(months: number): string {
   return d.toISOString().slice(0, 10);
 }
 
-export function SeverancePayCalculator() {
-  const [startDate, setStartDate] = useState(isoDateNMonthsAgo(12));
-  const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
-  const [last3MonthsWage, setLast3MonthsWage] = useState(9_000_000);
-  const [annualBonus, setAnnualBonus] = useState(0);
-  const [unusedLeavePay, setUnusedLeavePay] = useState(0);
+// 정적 빌드 시 한 번만 계산되지 않도록, 매 렌더마다 "오늘" 기준으로 새로 만든다.
+function getDefaultInput(): SeverancePayInput {
+  return {
+    startDate: isoDateNMonthsAgo(12),
+    endDate: new Date().toISOString().slice(0, 10),
+    last3MonthsWage: 9_000_000,
+    annualBonus: 0,
+    unusedLeavePay: 0,
+  };
+}
 
-  const result = useMemo(
-    () =>
-      calculateSeverancePay({
-        startDate,
-        endDate,
-        last3MonthsWage,
-        annualBonus,
-        unusedLeavePay,
-      }),
-    [startDate, endDate, last3MonthsWage, annualBonus, unusedLeavePay]
+export function SeverancePayCalculator() {
+  const [input, setInput] = usePersistedState<SeverancePayInput>(
+    CALCULATOR_INPUT_KEYS.severancePay,
+    getDefaultInput()
   );
+
+  function updateField<K extends keyof SeverancePayInput>(field: K, value: SeverancePayInput[K]) {
+    setInput((prev) => ({ ...prev, [field]: value }));
+  }
+
+  const result = useMemo(() => calculateSeverancePay(input), [input]);
 
   return (
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <DateField label="입사일" value={startDate} onChange={setStartDate} />
-        <DateField label="퇴사일 (예정일 포함)" value={endDate} onChange={setEndDate} />
+        <DateField label="입사일" value={input.startDate} onChange={(v) => updateField("startDate", v)} />
+        <DateField
+          label="퇴사일 (예정일 포함)"
+          value={input.endDate}
+          onChange={(v) => updateField("endDate", v)}
+        />
       </div>
 
       <NumberField
         label="퇴사 직전 3개월 급여 총액 (기본급+제수당)"
-        value={last3MonthsWage}
-        onChange={setLast3MonthsWage}
+        value={input.last3MonthsWage}
+        onChange={(v) => updateField("last3MonthsWage", v)}
         suffix="원"
       />
       <NumberField
         label="최근 1년간 받은 상여금 총액 (없으면 0)"
-        value={annualBonus}
-        onChange={setAnnualBonus}
+        value={input.annualBonus}
+        onChange={(v) => updateField("annualBonus", v)}
         suffix="원"
       />
       <NumberField
         label="최근 1년간 발생한 연차수당 총액 (없으면 0)"
-        value={unusedLeavePay}
-        onChange={setUnusedLeavePay}
+        value={input.unusedLeavePay}
+        onChange={(v) => updateField("unusedLeavePay", v)}
         suffix="원"
       />
 

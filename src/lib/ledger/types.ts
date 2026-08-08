@@ -1,3 +1,8 @@
+import {
+  createDefaultCalculatorLinkToggles,
+  type CalculatorLinkToggles,
+} from "@/lib/calculatorLinks/types";
+
 export type ExpenseCategory = "food" | "transport" | "housing" | "shopping" | "etc";
 
 export interface CategoryOption {
@@ -33,6 +38,8 @@ export interface LedgerSettings {
   monthlyIncome: number;
   monthlyBudget: number; // 0이면 미설정
   fixedExpenses: FixedExpense[];
+  // 4대보험료/퇴직금/주휴수당/연차수당 계산기 결과를 이 잔고 계산에 반영할지 여부.
+  calculatorLinks: CalculatorLinkToggles;
 }
 
 export interface LedgerData {
@@ -48,6 +55,7 @@ export function createDefaultLedgerData(): LedgerData {
       monthlyIncome: 3_000_000,
       monthlyBudget: 0,
       fixedExpenses: [],
+      calculatorLinks: createDefaultCalculatorLinkToggles(),
     },
     transactions: [],
   };

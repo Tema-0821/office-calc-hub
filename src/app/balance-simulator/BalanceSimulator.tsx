@@ -7,6 +7,9 @@ import { LedgerCalendar } from "@/components/ledger/LedgerCalendar";
 import { MonthSummaryCard } from "@/components/ledger/MonthSummaryCard";
 import { SettingsPanel } from "@/components/ledger/SettingsPanel";
 import { TransactionList } from "@/components/ledger/TransactionList";
+import { buildAdjustments } from "@/lib/calculatorLinks/buildAdjustments";
+import type { CalculatorLinkToggles } from "@/lib/calculatorLinks/types";
+import { useCalculatorLinks } from "@/lib/calculatorLinks/useCalculatorLinks";
 import {
   getCumulativeHistory,
   getMonthSummary,
@@ -30,27 +33,39 @@ function getAdjacentMonth(year: number, month: number, offset: 1 | -1) {
 
 export function BalanceSimulator() {
   const ledger = useLedger();
+  const calculatorLinks = useCalculatorLinks();
   const today = new Date();
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth() + 1);
 
+  const adjustments = useMemo(
+    () => buildAdjustments(ledger.data.settings.calculatorLinks, calculatorLinks.data),
+    [ledger.data.settings.calculatorLinks, calculatorLinks.data]
+  );
+
+  function handleToggleCalculatorLink(key: keyof CalculatorLinkToggles, value: boolean) {
+    ledger.updateSettings({
+      calculatorLinks: { ...ledger.data.settings.calculatorLinks, [key]: value },
+    });
+  }
+
   const summary = useMemo(
-    () => getMonthSummary(ledger.data, viewYear, viewMonth),
-    [ledger.data, viewYear, viewMonth]
+    () => getMonthSummary(ledger.data, viewYear, viewMonth, adjustments),
+    [ledger.data, viewYear, viewMonth, adjustments]
   );
   const history = useMemo(
-    () => getCumulativeHistory(ledger.data, viewYear, viewMonth),
-    [ledger.data, viewYear, viewMonth]
+    () => getCumulativeHistory(ledger.data, viewYear, viewMonth, adjustments),
+    [ledger.data, viewYear, viewMonth, adjustments]
   );
   const projection = useMemo(
-    () => getNextMonthProjection(ledger.data, viewYear, viewMonth),
-    [ledger.data, viewYear, viewMonth]
+    () => getNextMonthProjection(ledger.data, viewYear, viewMonth, adjustments),
+    [ledger.data, viewYear, viewMonth, adjustments]
   );
 
   const prevMonth = getAdjacentMonth(viewYear, viewMonth, -1);
   const prevSummary = useMemo(
-    () => getMonthSummary(ledger.data, prevMonth.year, prevMonth.month),
-    [ledger.data, prevMonth.year, prevMonth.month]
+    () => getMonthSummary(ledger.data, prevMonth.year, prevMonth.month, adjustments),
+    [ledger.data, prevMonth.year, prevMonth.month, adjustments]
   );
 
   const monthTransactions = useMemo(
@@ -93,6 +108,8 @@ export function BalanceSimulator() {
         onUpdateSettings={ledger.updateSettings}
         onAddFixedExpense={ledger.addFixedExpense}
         onRemoveFixedExpense={ledger.removeFixedExpense}
+        calculatorLinkData={calculatorLinks.data}
+        onToggleCalculatorLink={handleToggleCalculatorLink}
       />
 
       <div className="flex items-center justify-between">

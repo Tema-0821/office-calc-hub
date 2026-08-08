@@ -1,13 +1,18 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultRow } from "@/components/calculators/ResultRow";
 import { calculateFourInsurance, FOUR_INSURANCE_RATES_2026 } from "@/lib/calculators/fourInsurance";
+import { CALCULATOR_INPUT_KEYS } from "@/lib/calculators/storageKeys";
 import { formatWonKorean } from "@/lib/format";
+import { usePersistedState } from "@/lib/storage/usePersistedState";
 
 export function FourInsuranceCalculator() {
-  const [monthlySalary, setMonthlySalary] = useState(3_000_000);
+  const [monthlySalary, setMonthlySalary] = usePersistedState(
+    CALCULATOR_INPUT_KEYS.fourInsurance,
+    3_000_000
+  );
 
   const result = useMemo(() => calculateFourInsurance(monthlySalary), [monthlySalary]);
 

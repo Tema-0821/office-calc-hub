@@ -40,6 +40,18 @@ export function getCategoryTotals(transactions: Transaction[]): Record<ExpenseCa
   return totals;
 }
 
+export interface CalculatorAdjustments {
+  recurringFixedExtra: number; // 매달 고정지출에 추가 (예: 4대보험료 계산기 연동)
+  recurringIncomeExtra: number; // 매달 수입에 추가 (예: 주휴수당 계산기 연동)
+  oneTimeIncomes: { year: number; month: number; amount: number }[]; // 특정 달 1회 수입 (퇴직금, 연차수당)
+}
+
+export const EMPTY_ADJUSTMENTS: CalculatorAdjustments = {
+  recurringFixedExtra: 0,
+  recurringIncomeExtra: 0,
+  oneTimeIncomes: [],
+};
+
 export interface MonthSummary {
   year: number;
   month: number;
@@ -50,18 +62,27 @@ export interface MonthSummary {
   categoryTotals: Record<ExpenseCategory, number>;
 }
 
-export function getMonthSummary(data: LedgerData, year: number, month: number): MonthSummary {
-  const fixedTotal = sumAmount(data.settings.fixedExpenses);
+export function getMonthSummary(
+  data: LedgerData,
+  year: number,
+  month: number,
+  adjustments: CalculatorAdjustments = EMPTY_ADJUSTMENTS
+): MonthSummary {
+  const fixedTotal = sumAmount(data.settings.fixedExpenses) + adjustments.recurringFixedExtra;
   const monthTransactions = getMonthTransactions(data.transactions, year, month);
   const variableTotal = sumAmount(monthTransactions);
+  const oneTimeIncome = sumAmount(
+    adjustments.oneTimeIncomes.filter((entry) => entry.year === year && entry.month === month)
+  );
+  const income = data.settings.monthlyIncome + adjustments.recurringIncomeExtra + oneTimeIncome;
 
   return {
     year,
     month,
-    income: data.settings.monthlyIncome,
+    income,
     fixedTotal,
     variableTotal,
-    netChange: data.settings.monthlyIncome - fixedTotal - variableTotal,
+    netChange: income - fixedTotal - variableTotal,
     categoryTotals: getCategoryTotals(monthTransactions),
   };
 }
@@ -74,7 +95,8 @@ export interface MonthHistoryEntry extends MonthSummary {
 export function getCumulativeHistory(
   data: LedgerData,
   uptoYear: number,
-  uptoMonth: number
+  uptoMonth: number,
+  adjustments: CalculatorAdjustments = EMPTY_ADJUSTMENTS
 ): MonthHistoryEntry[] {
   const { year: startYear, month: startMonth } = parseYearMonth(data.settings.startDate);
 
@@ -87,7 +109,7 @@ export function getCumulativeHistory(
     (year < uptoYear || (year === uptoYear && month <= uptoMonth)) &&
     history.length < MAX_HISTORY_MONTHS
   ) {
-    const summary = getMonthSummary(data, year, month);
+    const summary = getMonthSummary(data, year, month, adjustments);
     balance += summary.netChange;
     history.push({ ...summary, cumulativeBalance: balance });
 
@@ -113,9 +135,10 @@ export interface NextMonthProjection {
 export function getNextMonthProjection(
   data: LedgerData,
   year: number,
-  month: number
+  month: number,
+  adjustments: CalculatorAdjustments = EMPTY_ADJUSTMENTS
 ): NextMonthProjection {
-  const summary = getMonthSummary(data, year, month);
+  const summary = getMonthSummary(data, year, month, adjustments);
   const today = new Date();
   const isCurrentMonth = today.getFullYear() === year && today.getMonth() + 1 === month;
   const elapsedDays = isCurrentMonth ? today.getDate() : daysInMonth(year, month);
@@ -128,8 +151,9 @@ export function getNextMonthProjection(
     nextYear += 1;
   }
 
+  const nextMonthSummary = getMonthSummary(data, nextYear, nextMonth, adjustments);
   const projectedVariable = dailyAvgVariable * daysInMonth(nextYear, nextMonth);
-  const projectedNetChange = data.settings.monthlyIncome - summary.fixedTotal - projectedVariable;
+  const projectedNetChange = nextMonthSummary.income - nextMonthSummary.fixedTotal - projectedVariable;
 
   return { dailyAvgVariable, projectedVariable, projectedNetChange, nextYear, nextMonth };
 }
