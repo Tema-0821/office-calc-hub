@@ -135,7 +135,7 @@ settings.json에 hooks를 등록한다. "매번 X 할 때마다 Y 해줘" 같은
 - **개발 서버 실행:** `npm run dev`
 - **빌드:** `npm run build`
 - **테스트:** (아직 없음 — 계산 로직에 유닛 테스트 추가 예정)
-- **배포:** `git push origin main` → Vercel 자동 배포 (예정, 저장소 연결 필요)
+- **배포:** `git push origin main` → Vercel 자동 배포 (연결 완료, https://office-calc-hub.vercel.app)
 - **주의사항:**
   - 세금/보험료/퇴직금 등 법정 수치를 다루므로, 요율·최저임금 등은 반드시 최신 공식 출처로 검증 후 반영할 것.
   - 현재는 DB 없는 순수 프론트엔드 구조. 추후 로그인 후 계산기록 저장 기능을 Supabase Auth + DB로 추가할 계획 — 이를 염두에 두고 계산 로직과 UI를 분리해서 작성할 것.
