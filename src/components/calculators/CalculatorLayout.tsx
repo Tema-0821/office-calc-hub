@@ -11,6 +11,8 @@ interface CalculatorLayoutProps {
   // 자체적으로 카드 여러 개를 이미 그리는 화면(예: 잔고 시뮬레이터)에서
   // 카드 안에 카드가 겹치지 않도록 바깥 카드 래퍼를 생략할 때 사용.
   bare?: boolean;
+  // 홈(잔고 시뮬레이터)처럼 자기 자신으로 돌아가는 링크가 의미 없는 화면에서 숨김.
+  hideBackLink?: boolean;
 }
 
 export function CalculatorLayout({
@@ -20,15 +22,20 @@ export function CalculatorLayout({
   guide,
   accent,
   bare = false,
+  hideBackLink = false,
 }: CalculatorLayoutProps) {
   const colors = ACCENT_CLASSES[accent];
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-10">
-      <Link href="/" className={`text-sm font-medium ${colors.link}`}>
-        ← 전체 계산기
-      </Link>
-      <h1 className="mt-3 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">{title}</h1>
+      {!hideBackLink && (
+        <Link href="/" className={`text-sm font-medium ${colors.link}`}>
+          ← 홈
+        </Link>
+      )}
+      <h1 className={`text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 ${hideBackLink ? "" : "mt-3"}`}>
+        {title}
+      </h1>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{description}</p>
 
       {bare ? (

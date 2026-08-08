@@ -5,6 +5,7 @@ interface AccentClasses {
   iconText: string;
   badgeBg: string;
   badgeText: string;
+  badgeActiveRing: string;
   cardBorder: string;
   cardHoverBorder: string;
   topBar: string;
@@ -21,6 +22,7 @@ export const ACCENT_CLASSES: Record<AccentColor, AccentClasses> = {
     iconText: "text-blue-600 dark:text-blue-400",
     badgeBg: "bg-blue-50 dark:bg-blue-500/10",
     badgeText: "text-blue-700 dark:text-blue-300",
+    badgeActiveRing: "ring-2 ring-blue-500 dark:ring-blue-400",
     cardBorder: "border-blue-100 dark:border-blue-900/60",
     cardHoverBorder: "hover:border-blue-300 dark:hover:border-blue-700",
     topBar: "bg-blue-500",
@@ -32,6 +34,7 @@ export const ACCENT_CLASSES: Record<AccentColor, AccentClasses> = {
     iconText: "text-violet-600 dark:text-violet-400",
     badgeBg: "bg-violet-50 dark:bg-violet-500/10",
     badgeText: "text-violet-700 dark:text-violet-300",
+    badgeActiveRing: "ring-2 ring-violet-500 dark:ring-violet-400",
     cardBorder: "border-violet-100 dark:border-violet-900/60",
     cardHoverBorder: "hover:border-violet-300 dark:hover:border-violet-700",
     topBar: "bg-violet-500",
@@ -43,6 +46,7 @@ export const ACCENT_CLASSES: Record<AccentColor, AccentClasses> = {
     iconText: "text-amber-600 dark:text-amber-400",
     badgeBg: "bg-amber-50 dark:bg-amber-500/10",
     badgeText: "text-amber-700 dark:text-amber-300",
+    badgeActiveRing: "ring-2 ring-amber-500 dark:ring-amber-400",
     cardBorder: "border-amber-100 dark:border-amber-900/60",
     cardHoverBorder: "hover:border-amber-300 dark:hover:border-amber-700",
     topBar: "bg-amber-500",
@@ -54,6 +58,7 @@ export const ACCENT_CLASSES: Record<AccentColor, AccentClasses> = {
     iconText: "text-emerald-600 dark:text-emerald-400",
     badgeBg: "bg-emerald-50 dark:bg-emerald-500/10",
     badgeText: "text-emerald-700 dark:text-emerald-300",
+    badgeActiveRing: "ring-2 ring-emerald-500 dark:ring-emerald-400",
     cardBorder: "border-emerald-100 dark:border-emerald-900/60",
     cardHoverBorder: "hover:border-emerald-300 dark:hover:border-emerald-700",
     topBar: "bg-emerald-500",
@@ -65,6 +70,7 @@ export const ACCENT_CLASSES: Record<AccentColor, AccentClasses> = {
     iconText: "text-rose-600 dark:text-rose-400",
     badgeBg: "bg-rose-50 dark:bg-rose-500/10",
     badgeText: "text-rose-700 dark:text-rose-300",
+    badgeActiveRing: "ring-2 ring-rose-500 dark:ring-rose-400",
     cardBorder: "border-rose-100 dark:border-rose-900/60",
     cardHoverBorder: "hover:border-rose-300 dark:hover:border-rose-700",
     topBar: "bg-rose-500",

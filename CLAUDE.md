@@ -141,4 +141,5 @@ settings.json에 hooks를 등록한다. "매번 X 할 때마다 Y 해줘" 같은
   - 현재는 DB 없는 순수 프론트엔드 구조. 추후 로그인 후 계산기록 저장 기능을 Supabase Auth + DB로 추가할 계획 — 이를 염두에 두고 계산 로직과 UI를 분리해서 작성할 것.
   - 수익화는 Google AdSense 광고 게재 목표. 애드센스 심사 통과를 위해 각 계산기 페이지에 이용 가이드/설명 콘텐츠, 개인정보처리방침, 사이트맵을 갖출 것.
   - v1 계산기 목록: 4대보험료, 퇴직금, 주휴수당, 연차수당. (실수령액/소득세 계산기는 국세청 간이세액표 데이터 확보 후 추가 예정)
-  - v2에서 잔고 시뮬레이터(가계부, `src/app/balance-simulator`) 추가: 월급·고정지출·달력 지출 기록으로 월별 순증감과 누적 잔고를 계산. 데이터는 로그인 없이 브라우저 localStorage에만 저장(`src/lib/ledger`). 저장 계층이 `useLedger` 훅 하나로 분리되어 있어, 나중에 Supabase Auth+DB로 바꿀 때 이 훅 내부만 교체하면 되고 UI 컴포넌트는 손댈 필요 없음.
+  - v2에서 잔고 시뮬레이터(가계부, `src/app/BalanceSimulator.tsx`) 추가: 월급·고정지출·달력 지출 기록으로 월별 순증감과 누적 잔고를 계산. 데이터는 로그인 없이 브라우저 localStorage에만 저장(`src/lib/ledger`). 저장 계층이 `useLedger` 훅 하나로 분리되어 있어, 나중에 Supabase Auth+DB로 바꿀 때 이 훅 내부만 교체하면 되고 UI 컴포넌트는 손댈 필요 없음.
+  - v3: 잔고 시뮬레이터가 홈(`/`)으로 이동, 나머지 계산기는 헤더의 색상 탭으로만 이동(`/balance-simulator`는 `/`로 308 리다이렉트, `next.config.ts`). 다크모드 토글 추가 — 기본은 라이트, `<html data-theme>` + `src/app/globals.css`의 `@custom-variant dark`로 전환(OS 설정 자동 반영 아님, 사용자가 직접 토글해야 함). 계산기별 강조색은 `src/lib/theme.ts`의 `ACCENT_CLASSES`에 문자열 그대로 정의되어 있음 — Tailwind는 클래스명을 소스에서 리터럴로 찾으므로 색상 클래스를 동적으로 조립하지 말 것.
