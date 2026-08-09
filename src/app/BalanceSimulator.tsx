@@ -127,21 +127,23 @@ export function BalanceSimulator() {
         </button>
       </div>
 
-      <MonthSummaryCard
-        summary={summary}
-        budget={ledger.data.settings.monthlyBudget}
-        projection={projection}
-        cumulativeBalance={cumulativeBalance}
-        goalAmount={ledger.data.settings.goalAmount}
-        goal={goal}
-      />
+      <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
+        <MonthSummaryCard
+          summary={summary}
+          budget={ledger.data.settings.monthlyBudget}
+          projection={projection}
+          cumulativeBalance={cumulativeBalance}
+          goalAmount={ledger.data.settings.goalAmount}
+          goal={goal}
+        />
 
-      <LedgerCalendar
-        year={viewYear}
-        month={viewMonth}
-        transactions={monthTransactions}
-        onAddTransaction={ledger.addTransaction}
-      />
+        <LedgerCalendar
+          year={viewYear}
+          month={viewMonth}
+          transactions={monthTransactions}
+          onAddTransaction={ledger.addTransaction}
+        />
+      </div>
 
       <TransactionList transactions={monthTransactions} onRemove={ledger.removeTransaction} />
 
