@@ -157,3 +157,37 @@ export function getNextMonthProjection(
 
   return { dailyAvgVariable, projectedVariable, projectedNetChange, nextYear, nextMonth };
 }
+
+export interface GoalProjection {
+  reached: boolean;
+  achievable: boolean; // false면 현재 추세(monthlyRate <= 0)로는 영원히 도달 못함
+  monthsNeeded: number | null;
+  targetYear: number | null;
+  targetMonth: number | null;
+}
+
+// goalAmount가 0(미설정)이면 null을 반환한다.
+export function getGoalProjection(
+  currentBalance: number,
+  goalAmount: number,
+  monthlyRate: number,
+  fromYear: number,
+  fromMonth: number
+): GoalProjection | null {
+  if (goalAmount <= 0) return null;
+
+  if (currentBalance >= goalAmount) {
+    return { reached: true, achievable: true, monthsNeeded: 0, targetYear: fromYear, targetMonth: fromMonth };
+  }
+
+  if (monthlyRate <= 0) {
+    return { reached: false, achievable: false, monthsNeeded: null, targetYear: null, targetMonth: null };
+  }
+
+  const monthsNeeded = Math.ceil((goalAmount - currentBalance) / monthlyRate);
+  const totalMonths = fromYear * 12 + (fromMonth - 1) + monthsNeeded;
+  const targetYear = Math.floor(totalMonths / 12);
+  const targetMonth = (totalMonths % 12) + 1;
+
+  return { reached: false, achievable: true, monthsNeeded, targetYear, targetMonth };
+}

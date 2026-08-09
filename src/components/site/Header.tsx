@@ -17,7 +17,7 @@ export function Header() {
         </Link>
         <ThemeToggle />
       </div>
-      <nav className="mx-auto max-w-3xl overflow-x-auto px-6 pb-3">
+      <nav className="mx-auto max-w-3xl overflow-x-auto px-6 pt-1 pb-3">
         <ul className="flex gap-2">
           {CALCULATORS.map((calc) => {
             const accent = ACCENT_CLASSES[calc.accent];

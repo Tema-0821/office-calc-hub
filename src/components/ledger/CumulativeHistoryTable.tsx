@@ -14,7 +14,7 @@ export function CumulativeHistoryTable({ history }: CumulativeHistoryTableProps)
           <thead>
             <tr className="border-b border-zinc-200 text-left text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
               <th className="py-2">월</th>
-              <th className="py-2 text-right">순증감</th>
+              <th className="py-2 text-right">남는 돈</th>
               <th className="py-2 text-right">누적 잔고</th>
             </tr>
           </thead>

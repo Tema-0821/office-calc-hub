@@ -12,24 +12,11 @@ import type { CalculatorLinkToggles } from "@/lib/calculatorLinks/types";
 import { useCalculatorLinks } from "@/lib/calculatorLinks/useCalculatorLinks";
 import {
   getCumulativeHistory,
+  getGoalProjection,
   getMonthSummary,
   getNextMonthProjection,
 } from "@/lib/ledger/calculations";
-import { formatWonKorean } from "@/lib/format";
 import { useLedger } from "@/lib/ledger/useLedger";
-
-function getAdjacentMonth(year: number, month: number, offset: 1 | -1) {
-  let nextMonth = month + offset;
-  let nextYear = year;
-  if (nextMonth > 12) {
-    nextMonth = 1;
-    nextYear += 1;
-  } else if (nextMonth < 1) {
-    nextMonth = 12;
-    nextYear -= 1;
-  }
-  return { year: nextYear, month: nextMonth };
-}
 
 export function BalanceSimulator() {
   const ledger = useLedger();
@@ -62,10 +49,18 @@ export function BalanceSimulator() {
     [ledger.data, viewYear, viewMonth, adjustments]
   );
 
-  const prevMonth = getAdjacentMonth(viewYear, viewMonth, -1);
-  const prevSummary = useMemo(
-    () => getMonthSummary(ledger.data, prevMonth.year, prevMonth.month, adjustments),
-    [ledger.data, prevMonth.year, prevMonth.month, adjustments]
+  const cumulativeBalance = history.length > 0 ? history[history.length - 1].cumulativeBalance : 0;
+
+  const goal = useMemo(
+    () =>
+      getGoalProjection(
+        cumulativeBalance,
+        ledger.data.settings.goalAmount,
+        projection.projectedNetChange,
+        viewYear,
+        viewMonth
+      ),
+    [cumulativeBalance, ledger.data.settings.goalAmount, projection.projectedNetChange, viewYear, viewMonth]
   );
 
   const monthTransactions = useMemo(
@@ -116,19 +111,9 @@ export function BalanceSimulator() {
         <button
           type="button"
           onClick={goPrevMonth}
-          className="flex flex-col items-start gap-0.5 rounded-lg border border-zinc-300 px-3 py-1.5 text-left hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
         >
-          <span className="text-sm">← {prevMonth.month}월</span>
-          <span
-            className={`text-xs tabular-nums ${
-              prevSummary.netChange >= 0
-                ? "text-emerald-600 dark:text-emerald-400"
-                : "text-red-500"
-            }`}
-          >
-            {prevSummary.netChange >= 0 ? "+" : ""}
-            {formatWonKorean(prevSummary.netChange)}
-          </span>
+          ← 이전달
         </button>
         <h2 className="text-lg font-bold">
           {viewYear}년 {viewMonth}월
@@ -136,23 +121,20 @@ export function BalanceSimulator() {
         <button
           type="button"
           onClick={goNextMonth}
-          className="flex flex-col items-end gap-0.5 rounded-lg border border-zinc-300 px-3 py-1.5 text-right hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
         >
-          <span className="text-sm">{projection.nextMonth}월 →</span>
-          <span
-            className={`text-xs tabular-nums ${
-              projection.projectedNetChange >= 0
-                ? "text-emerald-600 dark:text-emerald-400"
-                : "text-red-500"
-            }`}
-          >
-            {projection.projectedNetChange >= 0 ? "+" : ""}
-            {formatWonKorean(projection.projectedNetChange)} (예상)
-          </span>
+          다음달 →
         </button>
       </div>
 
-      <MonthSummaryCard summary={summary} budget={ledger.data.settings.monthlyBudget} projection={projection} />
+      <MonthSummaryCard
+        summary={summary}
+        budget={ledger.data.settings.monthlyBudget}
+        projection={projection}
+        cumulativeBalance={cumulativeBalance}
+        goalAmount={ledger.data.settings.goalAmount}
+        goal={goal}
+      />
 
       <LedgerCalendar
         year={viewYear}

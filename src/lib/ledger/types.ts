@@ -37,6 +37,7 @@ export interface LedgerSettings {
   startingBalance: number;
   monthlyIncome: number;
   monthlyBudget: number; // 0이면 미설정
+  goalAmount: number; // 0이면 미설정. 목표 금액 달성까지 남은 개월 수 계산에 사용
   fixedExpenses: FixedExpense[];
   // 4대보험료/퇴직금/주휴수당/연차수당 계산기 결과를 이 잔고 계산에 반영할지 여부.
   calculatorLinks: CalculatorLinkToggles;
@@ -54,6 +55,7 @@ export function createDefaultLedgerData(): LedgerData {
       startingBalance: 0,
       monthlyIncome: 3_000_000,
       monthlyBudget: 0,
+      goalAmount: 0,
       fixedExpenses: [],
       calculatorLinks: createDefaultCalculatorLinkToggles(),
     },

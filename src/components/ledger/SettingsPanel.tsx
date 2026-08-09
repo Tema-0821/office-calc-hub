@@ -65,6 +65,13 @@ export function SettingsPanel({
           onChange={(v) => onUpdateSettings({ monthlyBudget: v })}
           suffix="원"
         />
+        <NumberField
+          label="목표 금액 (0=미설정)"
+          value={settings.goalAmount}
+          onChange={(v) => onUpdateSettings({ goalAmount: v })}
+          suffix="원"
+          helpText="모으고 싶은 금액을 입력하면 지금 추세로 몇 개월 후에 도달하는지 알려줘요."
+        />
       </div>
 
       <div className="mt-6">
