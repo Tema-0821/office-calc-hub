@@ -5,6 +5,7 @@ import { SITE_URL } from "@/lib/config";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/feedback`, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const calculatorRoutes: MetadataRoute.Sitemap = CALCULATORS.map((calc) => ({

@@ -33,8 +33,16 @@ export function MonthSummaryCard({
         <ResultRow label="수입" value={formatWonKorean(summary.income)} />
         <ResultRow label="고정지출" value={formatWonKorean(summary.fixedTotal)} />
         <ResultRow label="변동지출 (달력 기록)" value={formatWonKorean(summary.variableTotal)} />
-        <ResultRow label="이번 달에 남는 돈" value={formatWonKorean(summary.netChange)} emphasis />
-        <ResultRow label="예상 잔고 (누적)" value={formatWonKorean(cumulativeBalance)} emphasis />
+        <ResultRow
+          label={`이번 달(${summary.month}월)에 남는 돈`}
+          value={formatWonKorean(summary.netChange)}
+          emphasis
+        />
+        <ResultRow
+          label={`${summary.month}월 예상 잔고 (누적)`}
+          value={formatWonKorean(cumulativeBalance)}
+          emphasis
+        />
       </div>
 
       {goalAmount > 0 && goal && (

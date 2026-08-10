@@ -15,7 +15,15 @@ export function Header() {
         <Link href="/" className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
           직장인 계산기 허브
         </Link>
-        <ThemeToggle />
+        <div className="flex items-center gap-1">
+          <Link
+            href="/feedback"
+            className="rounded-full px-3 py-1.5 text-xs font-medium text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+          >
+            💬 건의·버그
+          </Link>
+          <ThemeToggle />
+        </div>
       </div>
       <nav className="mx-auto max-w-3xl overflow-x-auto px-6 pt-1 pb-3">
         <ul className="flex gap-2">
