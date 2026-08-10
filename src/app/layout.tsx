@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   description: "급여, 퇴직금, 주휴수당, 연차수당까지 직장인 필수 계산기를 한곳에서.",
   robots: { index: true, follow: true },
   verification: {
+    google: "rbGqUYUs0cI9vsjtDk2C8nIqEl8M2Hs3513F1B57ivM",
     other: {
       "naver-site-verification": "a28fff8501ef2f01bfa612f78e05fa71515faf42",
     },
