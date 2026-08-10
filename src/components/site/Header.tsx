@@ -10,7 +10,7 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+    <header className="border-b border-zinc-200 bg-gradient-to-r from-blue-50 via-violet-50 to-rose-50 dark:border-zinc-800 dark:from-blue-950/30 dark:via-violet-950/20 dark:to-rose-950/30">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
         <Link href="/" className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
           직장인 계산기 허브
@@ -27,9 +27,7 @@ export function Header() {
                 <Link
                   href={calc.href}
                   className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap transition-opacity ${accent.badgeBg} ${accent.badgeText} ${
-                    isActive
-                      ? `${accent.badgeActiveRing} ring-offset-1 ring-offset-white dark:ring-offset-zinc-950`
-                      : "opacity-70 hover:opacity-100"
+                    isActive ? accent.badgeActiveRing : "opacity-70 hover:opacity-100"
                   }`}
                 >
                   {calc.icon} {calc.shortTitle}
