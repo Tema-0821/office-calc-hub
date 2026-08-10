@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { CalculatorLayout } from "@/components/calculators/CalculatorLayout";
+import { buildMetadata } from "@/lib/seo";
 import { FourInsuranceCalculator } from "./FourInsuranceCalculator";
 
-export const metadata: Metadata = {
-  title: "4대보험료 계산기 (2026년 기준) | 직장인 계산기 허브",
+export const metadata = buildMetadata({
+  title: "4대보험료 계산기 (2026년 기준)",
   description:
     "월급을 입력하면 국민연금, 건강보험, 장기요양보험, 고용보험 근로자 부담분과 예상 실수령액을 바로 계산해줍니다.",
-};
+  path: "/four-insurance",
+});
 
 export default function Page() {
   return (

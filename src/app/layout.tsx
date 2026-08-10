@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { InlineScript } from "@/components/site/InlineScript";
+import { SITE_URL } from "@/lib/config";
+import { SITE_NAME } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,11 +18,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "직장인 계산기 허브",
-    template: "%s",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
   description: "급여, 퇴직금, 주휴수당, 연차수당까지 직장인 필수 계산기를 한곳에서.",
+  robots: { index: true, follow: true },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: "4대보험료, 퇴직금, 주휴수당, 연차수당 계산기와 잔고 시뮬레이터(가계부)를 무료로 제공하는 사이트",
+  inLanguage: "ko-KR",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -36,6 +49,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             data-theme를 바꿔서 다크 화면이 잠깐 하얗게 보이는 깜빡임을 막는다. */}
         <InlineScript
           html={`(function(){try{if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark")}}catch(e){}})()`}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
         <Header />
         <main className="flex-1">{children}</main>

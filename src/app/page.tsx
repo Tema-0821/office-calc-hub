@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { CalculatorLayout } from "@/components/calculators/CalculatorLayout";
+import { buildMetadata } from "@/lib/seo";
 import { BalanceSimulator } from "./BalanceSimulator";
 
-export const metadata: Metadata = {
-  title: "잔고 시뮬레이터 (가계부) | 직장인 계산기 허브",
+export const metadata = buildMetadata({
+  title: "잔고 시뮬레이터 (가계부)",
   description:
     "월급과 고정지출을 등록하고 달력에 지출을 기록하면, 매달 잔고가 어떻게 쌓이는지 자동으로 계산해주는 가계부형 시뮬레이터입니다.",
-};
+  path: "",
+});
 
 export default function Home() {
   return (

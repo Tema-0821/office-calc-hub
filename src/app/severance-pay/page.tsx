@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { CalculatorLayout } from "@/components/calculators/CalculatorLayout";
+import { buildMetadata } from "@/lib/seo";
 import { SeverancePayCalculator } from "./SeverancePayCalculator";
 
-export const metadata: Metadata = {
-  title: "퇴직금 계산기 (2026년 기준) | 직장인 계산기 허브",
+export const metadata = buildMetadata({
+  title: "퇴직금 계산기 (2026년 기준)",
   description:
     "입사일, 퇴사일, 최근 3개월 급여를 입력하면 근로기준법 평균임금 기준 예상 퇴직금을 계산해줍니다.",
-};
+  path: "/severance-pay",
+});
 
 export default function Page() {
   return (

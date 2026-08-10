@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import { CalculatorLayout } from "@/components/calculators/CalculatorLayout";
+import { buildMetadata } from "@/lib/seo";
 import { AnnualLeavePayCalculator } from "./AnnualLeavePayCalculator";
 
-export const metadata: Metadata = {
-  title: "연차수당 계산기 | 직장인 계산기 허브",
+export const metadata = buildMetadata({
+  title: "연차수당 계산기",
   description: "월급과 미사용 연차일수를 입력하면 통상임금 기준 연차수당을 계산해줍니다.",
-};
+  path: "/annual-leave-pay",
+});
 
 export default function Page() {
   return (

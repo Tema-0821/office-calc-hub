@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import { CalculatorLayout } from "@/components/calculators/CalculatorLayout";
+import { buildMetadata } from "@/lib/seo";
 import { WeeklyHolidayPayCalculator } from "./WeeklyHolidayPayCalculator";
 
-export const metadata: Metadata = {
-  title: "주휴수당 계산기 (2026년 최저시급 기준) | 직장인 계산기 허브",
+export const metadata = buildMetadata({
+  title: "주휴수당 계산기 (2026년 최저시급 기준)",
   description: "시급과 주 근무시간을 입력하면 주휴수당 지급 대상 여부와 예상 금액을 계산해줍니다.",
-};
+  path: "/weekly-holiday-pay",
+});
 
 export default function Page() {
   return (

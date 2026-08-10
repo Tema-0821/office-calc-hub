@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "개인정보처리방침 | 직장인 계산기 허브",
+export const metadata = buildMetadata({
+  title: "개인정보처리방침",
   description: "직장인 계산기 허브의 개인정보처리방침과 광고(쿠키) 안내입니다.",
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
