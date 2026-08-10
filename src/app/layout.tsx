@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { InlineScript } from "@/components/site/InlineScript";
@@ -50,6 +51,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Google AdSense 사이트 연결 확인용 스니펫. */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9915051439055619"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className="flex min-h-full flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
         {/* 기본은 라이트 모드. 저장된 선호가 dark일 때만, 화면이 그려지기 전에
             data-theme를 바꿔서 다크 화면이 잠깐 하얗게 보이는 깜빡임을 막는다. */}
