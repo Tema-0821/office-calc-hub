@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CALCULATORS } from "@/lib/calculators";
+import { SITE_NAME } from "@/lib/seo";
 import { ACCENT_CLASSES } from "@/lib/theme";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -13,7 +14,7 @@ export function Header() {
     <header className="border-b border-zinc-200 bg-gradient-to-r from-blue-50 via-violet-50 to-rose-50 dark:border-zinc-800 dark:from-blue-950/30 dark:via-violet-950/20 dark:to-rose-950/30">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Link href="/" className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-          직장인 계산기 허브
+          {SITE_NAME}
         </Link>
         <div className="flex items-center gap-1">
           <Link

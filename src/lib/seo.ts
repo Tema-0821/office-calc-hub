@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "./config";
 
-export const SITE_NAME = "직장인 계산기 허브";
+export const SITE_NAME = "근로계산기";
 
 interface BuildMetadataOptions {
   title: string;
   description: string;
   path?: string; // "/four-insurance" 처럼 슬래시로 시작. 홈은 ""
+  // true면 layout의 title.template("%s | 사이트명")을 건너뛰고 title을 그대로 쓴다.
+  // 홈페이지처럼 title 자체가 이미 사이트명을 포함해 완결된 문구일 때 사용.
+  absoluteTitle?: boolean;
 }
 
 // opengraph-image.tsx는 같은 경로("/")에서만 자동 적용되고 다른 라우트로는
@@ -19,11 +22,16 @@ const OG_IMAGE = {
 };
 
 // 페이지마다 반복되는 openGraph/twitter/canonical 설정을 한 곳에서 만든다.
-export function buildMetadata({ title, description, path = "" }: BuildMetadataOptions): Metadata {
+export function buildMetadata({
+  title,
+  description,
+  path = "",
+  absoluteTitle = false,
+}: BuildMetadataOptions): Metadata {
   const url = `${SITE_URL}${path}`;
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: {
       canonical: url,

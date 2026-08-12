@@ -1,12 +1,14 @@
 import type { AccentColor } from "@/lib/theme";
 
-export type CalculatorCategory = "salary" | "budget" | "life" | "tax";
+export type CalculatorCategory = "salary" | "allowance" | "retirement" | "tax" | "life" | "budget";
 
 export const CALCULATOR_CATEGORIES: Record<CalculatorCategory, string> = {
-  salary: "급여·근로 계산기",
-  budget: "가계부 도구",
-  life: "생활 계산기",
-  tax: "세금 계산기",
+  salary: "급여·연봉",
+  allowance: "수당",
+  retirement: "퇴사·실업",
+  tax: "세금",
+  life: "생활",
+  budget: "가계부",
 };
 
 export interface CalculatorMeta {
@@ -23,7 +25,7 @@ export interface CalculatorMeta {
 export const CALCULATORS: CalculatorMeta[] = [
   {
     slug: "balance-simulator",
-    href: "/",
+    href: "/balance-simulator",
     title: "가계부 (잔고 시뮬레이터)",
     shortTitle: "가계부",
     description: "월급·고정지출·달력 지출 기록으로 매달 잔고가 어떻게 쌓이는지 보여주는 가계부형 도구예요.",
@@ -49,7 +51,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description: "입사일·퇴사일과 최근 3개월 급여로 평균임금 기준 예상 퇴직금을 계산해줘요.",
     icon: "💼",
     accent: "violet",
-    category: "salary",
+    category: "retirement",
   },
   {
     slug: "weekly-holiday-pay",
@@ -59,7 +61,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description: "시급과 주 근무시간을 입력하면 주휴수당 지급 대상인지, 얼마인지 알려줘요.",
     icon: "📅",
     accent: "amber",
-    category: "salary",
+    category: "allowance",
   },
   {
     slug: "annual-leave-pay",
@@ -69,7 +71,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description: "월급과 미사용 연차일수로 통상임금 기준 연차수당을 계산해줘요.",
     icon: "🌴",
     accent: "emerald",
-    category: "salary",
+    category: "allowance",
   },
   {
     slug: "korean-age",
@@ -109,6 +111,6 @@ export const CALCULATORS: CalculatorMeta[] = [
     description: "퇴직 전 3개월 평균임금, 나이, 고용보험 가입기간으로 예상 구직급여를 계산해줘요.",
     icon: "🧭",
     accent: "sky",
-    category: "salary",
+    category: "retirement",
   },
 ];

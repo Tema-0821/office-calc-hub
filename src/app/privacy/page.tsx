@@ -1,8 +1,8 @@
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, SITE_NAME } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "개인정보처리방침",
-  description: "직장인 계산기 허브의 개인정보처리방침과 광고(쿠키) 안내입니다.",
+  description: `${SITE_NAME}의 개인정보처리방침과 광고(쿠키) 안내입니다.`,
   path: "/privacy",
 });
 
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="mb-2 text-lg font-semibold">1. 수집하는 정보</h2>
           <p>
-            직장인 계산기 허브(이하 &ldquo;본 사이트&rdquo;)는 회원가입이나 로그인 없이 이용할 수
+            {SITE_NAME}(이하 &ldquo;본 사이트&rdquo;)는 회원가입이나 로그인 없이 이용할 수
             있으며, 계산기에 입력하는 급여·근무시간 등의 정보는 브라우저 내에서만 계산에 사용되고
             서버로 전송되거나 저장되지 않습니다.
           </p>

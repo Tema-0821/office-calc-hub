@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SITE_NAME } from "@/lib/seo";
 
 export function Footer() {
   return (
@@ -12,7 +13,7 @@ export function Footer() {
           <Link href="/privacy" className="hover:text-zinc-900 dark:hover:text-zinc-100">
             개인정보처리방침
           </Link>
-          <span>&copy; {new Date().getFullYear()} 직장인 계산기 허브</span>
+          <span>&copy; {new Date().getFullYear()} {SITE_NAME}</span>
         </div>
       </div>
     </footer>

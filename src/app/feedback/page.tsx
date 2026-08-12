@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { FeedbackForm } from "@/components/feedback/FeedbackForm";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, SITE_NAME } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "건의사항·버그 제보",
-  description: "직장인 계산기 허브에 건의사항이나 버그를 남겨주세요. 바로 이메일로 전달됩니다.",
+  description: `${SITE_NAME}에 건의사항이나 버그를 남겨주세요. 바로 이메일로 전달됩니다.`,
   path: "/feedback",
 });
 

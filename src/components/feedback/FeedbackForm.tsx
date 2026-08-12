@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { WEB3FORMS_ACCESS_KEY } from "@/lib/feedback";
+import { SITE_NAME } from "@/lib/seo";
 
 type FeedbackType = "suggestion" | "bug";
 type Status = "idle" | "submitting" | "success" | "error";
@@ -30,8 +31,8 @@ export function FeedbackForm() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
-          subject: `[${TYPE_LABELS[type]}] 직장인 계산기 허브`,
-          from_name: "직장인 계산기 허브 건의함",
+          subject: `[${TYPE_LABELS[type]}] ${SITE_NAME}`,
+          from_name: `${SITE_NAME} 건의함`,
           유형: TYPE_LABELS[type],
           이름: name || "(입력 안 함)",
           답장받을_이메일: email || "(입력 안 함)",
