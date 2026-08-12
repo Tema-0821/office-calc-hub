@@ -1,17 +1,6 @@
 import Link from "next/link";
-import { CALCULATOR_CATEGORIES, CALCULATORS, type CalculatorCategory } from "@/lib/calculators";
-import { ACCENT_CLASSES, type AccentColor } from "@/lib/theme";
-
-const CATEGORY_ORDER: CalculatorCategory[] = ["salary", "allowance", "retirement", "tax", "life", "budget"];
-
-const CATEGORY_ACCENT: Record<CalculatorCategory, AccentColor> = {
-  salary: "blue",
-  allowance: "amber",
-  retirement: "violet",
-  tax: "cyan",
-  life: "teal",
-  budget: "rose",
-};
+import { CALCULATOR_CATEGORIES, CALCULATORS, CATEGORY_ACCENT, CATEGORY_ORDER } from "@/lib/calculators";
+import { ACCENT_CLASSES } from "@/lib/theme";
 
 export function CalculatorDirectory() {
   return (

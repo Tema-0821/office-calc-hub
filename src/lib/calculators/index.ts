@@ -11,6 +11,24 @@ export const CALCULATOR_CATEGORIES: Record<CalculatorCategory, string> = {
   budget: "가계부",
 };
 
+export const CATEGORY_ORDER: CalculatorCategory[] = [
+  "salary",
+  "allowance",
+  "retirement",
+  "tax",
+  "life",
+  "budget",
+];
+
+export const CATEGORY_ACCENT: Record<CalculatorCategory, AccentColor> = {
+  salary: "blue",
+  allowance: "amber",
+  retirement: "violet",
+  tax: "cyan",
+  life: "teal",
+  budget: "rose",
+};
+
 export interface CalculatorMeta {
   slug: string;
   href: string;

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CategorySidebar } from "./CategorySidebar";
 import { FaqSection, type FaqItem } from "./FaqSection";
 import { RelatedCalculators } from "./RelatedCalculators";
 import { ACCENT_CLASSES, type AccentColor } from "@/lib/theme";
@@ -40,49 +41,59 @@ export function CalculatorLayout({
 
   return (
     <div className="mx-auto w-full max-w-5xl px-6 py-10">
-      <div className={contentWidth}>
-        {!hideBackLink && (
-          <Link href="/" className={`text-sm font-medium ${colors.link}`}>
-            ← 홈
-          </Link>
-        )}
-        <h1
-          className={`text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 ${hideBackLink ? "" : "mt-3"}`}
-        >
-          {title}
-        </h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{description}</p>
+      <div className="flex gap-8">
+        <aside className="hidden w-44 shrink-0 md:block">
+          <div className="sticky top-6">
+            <CategorySidebar />
+          </div>
+        </aside>
+
+        <div className="min-w-0 flex-1">
+          <div className={contentWidth}>
+            {!hideBackLink && (
+              <Link href="/" className={`text-sm font-medium ${colors.link}`}>
+                ← 홈
+              </Link>
+            )}
+            <h1
+              className={`text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 ${hideBackLink ? "" : "mt-3"}`}
+            >
+              {title}
+            </h1>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{description}</p>
+          </div>
+
+          {bare ? (
+            <div className="mt-6">{children}</div>
+          ) : (
+            <div
+              className={`mt-6 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900 ${contentWidth}`}
+            >
+              <div className={`h-1.5 w-full ${colors.topBar}`} />
+              <div className="p-6">{children}</div>
+            </div>
+          )}
+
+          <section className={`mt-10 border-t border-zinc-200 pt-8 dark:border-zinc-800 ${contentWidth}`}>
+            <h2 className="text-lg font-semibold">이용 가이드</h2>
+            <div className="prose-sm mt-3 space-y-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              {guide}
+            </div>
+          </section>
+
+          {related && related.length > 0 && (
+            <div className={contentWidth}>
+              <RelatedCalculators slugs={related} />
+            </div>
+          )}
+
+          {faq && faq.length > 0 && (
+            <div className={contentWidth}>
+              <FaqSection items={faq} />
+            </div>
+          )}
+        </div>
       </div>
-
-      {bare ? (
-        <div className="mt-6">{children}</div>
-      ) : (
-        <div
-          className={`mt-6 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900 ${contentWidth}`}
-        >
-          <div className={`h-1.5 w-full ${colors.topBar}`} />
-          <div className="p-6">{children}</div>
-        </div>
-      )}
-
-      <section className={`mt-10 border-t border-zinc-200 pt-8 dark:border-zinc-800 ${contentWidth}`}>
-        <h2 className="text-lg font-semibold">이용 가이드</h2>
-        <div className="prose-sm mt-3 space-y-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          {guide}
-        </div>
-      </section>
-
-      {related && related.length > 0 && (
-        <div className={contentWidth}>
-          <RelatedCalculators slugs={related} />
-        </div>
-      )}
-
-      {faq && faq.length > 0 && (
-        <div className={contentWidth}>
-          <FaqSection items={faq} />
-        </div>
-      )}
     </div>
   );
 }
