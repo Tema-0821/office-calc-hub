@@ -1,4 +1,4 @@
-export type AccentColor = "blue" | "violet" | "amber" | "emerald" | "rose";
+export type AccentColor = "blue" | "violet" | "amber" | "emerald" | "rose" | "teal";
 
 interface AccentClasses {
   iconBg: string;
@@ -76,5 +76,17 @@ export const ACCENT_CLASSES: Record<AccentColor, AccentClasses> = {
     topBar: "bg-rose-500",
     link: "text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300",
     dot: "bg-rose-500",
+  },
+  teal: {
+    iconBg: "bg-teal-100 dark:bg-teal-500/15",
+    iconText: "text-teal-600 dark:text-teal-400",
+    badgeBg: "bg-teal-50 dark:bg-teal-500/10",
+    badgeText: "text-teal-700 dark:text-teal-300",
+    badgeActiveRing: "ring-2 ring-teal-500 dark:ring-teal-400",
+    cardBorder: "border-teal-100 dark:border-teal-900/60",
+    cardHoverBorder: "hover:border-teal-300 dark:hover:border-teal-700",
+    topBar: "bg-teal-500",
+    link: "text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300",
+    dot: "bg-teal-500",
   },
 };

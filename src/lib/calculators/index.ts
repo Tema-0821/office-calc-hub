@@ -1,10 +1,11 @@
 import type { AccentColor } from "@/lib/theme";
 
-export type CalculatorCategory = "salary" | "budget";
+export type CalculatorCategory = "salary" | "budget" | "life";
 
 export const CALCULATOR_CATEGORIES: Record<CalculatorCategory, string> = {
   salary: "급여·근로 계산기",
   budget: "가계부 도구",
+  life: "생활 계산기",
 };
 
 export interface CalculatorMeta {
@@ -68,5 +69,15 @@ export const CALCULATORS: CalculatorMeta[] = [
     icon: "🌴",
     accent: "emerald",
     category: "salary",
+  },
+  {
+    slug: "korean-age",
+    href: "/korean-age",
+    title: "만 나이 계산기",
+    shortTitle: "만 나이",
+    description: "생년월일을 입력하면 만 나이와 연 나이, 다음 생일까지 남은 날짜를 계산해줘요.",
+    icon: "🎂",
+    accent: "teal",
+    category: "life",
   },
 ];
