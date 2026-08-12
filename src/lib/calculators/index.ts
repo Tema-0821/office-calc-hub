@@ -24,8 +24,8 @@ export const CALCULATORS: CalculatorMeta[] = [
   {
     slug: "balance-simulator",
     href: "/",
-    title: "잔고 시뮬레이터 (가계부)",
-    shortTitle: "잔고 시뮬레이터 (가계부)",
+    title: "가계부 (잔고 시뮬레이터)",
+    shortTitle: "가계부",
     description: "월급·고정지출·달력 지출 기록으로 매달 잔고가 어떻게 쌓이는지 보여주는 가계부형 도구예요.",
     icon: "💰",
     accent: "rose",

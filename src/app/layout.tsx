@@ -38,7 +38,7 @@ const jsonLd = {
   "@type": "WebSite",
   name: SITE_NAME,
   url: SITE_URL,
-  description: "4대보험료, 퇴직금, 주휴수당, 연차수당 계산기와 잔고 시뮬레이터(가계부)를 무료로 제공하는 사이트",
+  description: "4대보험료, 퇴직금, 주휴수당, 연차수당 계산기와 가계부(잔고 시뮬레이터)를 무료로 제공하는 사이트",
   inLanguage: "ko-KR",
 };
 

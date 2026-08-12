@@ -3,16 +3,16 @@ import { buildMetadata } from "@/lib/seo";
 import { BalanceSimulator } from "./BalanceSimulator";
 
 export const metadata = buildMetadata({
-  title: "잔고 시뮬레이터 (가계부)",
+  title: "가계부 (잔고 시뮬레이터)",
   description:
-    "월급과 고정지출을 등록하고 달력에 지출을 기록하면, 매달 잔고가 어떻게 쌓이는지 자동으로 계산해주는 가계부형 시뮬레이터입니다.",
+    "무료 온라인 가계부입니다. 월급과 고정지출을 등록하고 달력에 지출을 기록하면, 매달 잔고가 어떻게 쌓이는지 자동으로 계산해주는 잔고 시뮬레이터 기능을 제공합니다.",
   path: "",
 });
 
 export default function Home() {
   return (
     <CalculatorLayout
-      title="잔고 시뮬레이터 (가계부)"
+      title="가계부 (잔고 시뮬레이터)"
       description="월급, 고정지출, 그날그날의 지출을 기록하면 매달 잔고가 얼마나 쌓이는지 보여줍니다."
       accent="rose"
       bare
