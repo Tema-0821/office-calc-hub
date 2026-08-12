@@ -50,6 +50,7 @@ export default function Page() {
             "아니요, 주휴수당은 실제 근무시간과 관계없이 최대 8시간분(하루치)까지만 인정됩니다. 주 40시간을 초과해서 일해도 주휴수당이 비례해서 늘어나지는 않습니다.",
         },
       ]}
+      related={["four-insurance", "annual-leave-pay", "salary-converter"]}
     >
       <WeeklyHolidayPayCalculator />
     </CalculatorLayout>

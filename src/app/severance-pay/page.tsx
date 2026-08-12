@@ -53,6 +53,7 @@ export default function Page() {
             "네, 퇴직금은 퇴직소득세 과세 대상입니다. 이 계산기는 세전 예상 퇴직금만 계산하며, 실제 수령액은 근속연수·공제 항목에 따른 퇴직소득세를 제외한 금액입니다.",
         },
       ]}
+      related={["unemployment-benefit", "annual-leave-pay", "salary-converter"]}
     >
       <SeverancePayCalculator />
     </CalculatorLayout>

@@ -5,4 +5,6 @@ export const CALCULATOR_INPUT_KEYS = {
   annualLeavePay: "office-calc-hub:calc-input:annual-leave-pay",
   koreanAge: "office-calc-hub:calc-input:korean-age",
   vat: "office-calc-hub:calc-input:vat",
+  salaryConverter: "office-calc-hub:calc-input:salary-converter",
+  unemploymentBenefit: "office-calc-hub:calc-input:unemployment-benefit",
 } as const;

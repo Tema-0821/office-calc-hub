@@ -49,6 +49,7 @@ export default function Page() {
             "네, 퇴사 시점까지 발생했지만 사용하지 못한 연차는 미사용 연차수당으로 정산해서 지급받아야 합니다.",
         },
       ]}
+      related={["weekly-holiday-pay", "severance-pay", "salary-converter"]}
     >
       <AnnualLeavePayCalculator />
     </CalculatorLayout>

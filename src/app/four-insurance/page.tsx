@@ -55,6 +55,7 @@ export default function Page() {
             "아니요, 이 계산기는 4대보험료만 계산합니다. 소득세·지방소득세는 부양가족 수 등에 따라 국세청 근로소득 간이세액표를 기준으로 별도 결정되며, 이 사이트에서는 아직 제공하지 않습니다.",
         },
       ]}
+      related={["salary-converter", "unemployment-benefit", "balance-simulator"]}
     >
       <FourInsuranceCalculator />
     </CalculatorLayout>

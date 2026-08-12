@@ -48,6 +48,7 @@ export default function Page() {
             "아니요, 미가공 식료품, 도서, 의료·교육 용역 등 부가가치세법상 면세 품목은 부가세가 붙지 않습니다. 이 계산기는 과세 대상 거래를 전제로 합니다.",
         },
       ]}
+      related={["balance-simulator", "salary-converter"]}
     >
       <VatCalculator />
     </CalculatorLayout>

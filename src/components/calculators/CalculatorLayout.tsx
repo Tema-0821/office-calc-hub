@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { FaqSection, type FaqItem } from "./FaqSection";
+import { RelatedCalculators } from "./RelatedCalculators";
 import { ACCENT_CLASSES, type AccentColor } from "@/lib/theme";
 
 interface CalculatorLayoutProps {
@@ -11,6 +12,8 @@ interface CalculatorLayoutProps {
   accent: AccentColor;
   // 검색결과 리치 스니펫(FAQPage)용 자주 묻는 질문. 없으면 섹션 자체를 생략한다.
   faq?: FaqItem[];
+  // 내부 링크 강화용 관련 계산기 slug 목록. 없으면 섹션 자체를 생략한다.
+  related?: string[];
   // 자체적으로 카드 여러 개를 이미 그리는 화면(예: 잔고 시뮬레이터)에서
   // 카드 안에 카드가 겹치지 않도록 바깥 카드 래퍼를 생략할 때 사용.
   // 이런 화면은 넓어진 전체 폭을 그대로 활용한다(2단 배치 등).
@@ -26,6 +29,7 @@ export function CalculatorLayout({
   guide,
   accent,
   faq,
+  related,
   bare = false,
   hideBackLink = false,
 }: CalculatorLayoutProps) {
@@ -67,6 +71,12 @@ export function CalculatorLayout({
           {guide}
         </div>
       </section>
+
+      {related && related.length > 0 && (
+        <div className={contentWidth}>
+          <RelatedCalculators slugs={related} />
+        </div>
+      )}
 
       {faq && faq.length > 0 && (
         <div className={contentWidth}>

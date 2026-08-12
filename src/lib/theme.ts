@@ -1,4 +1,13 @@
-export type AccentColor = "blue" | "violet" | "amber" | "emerald" | "rose" | "teal" | "cyan";
+export type AccentColor =
+  | "blue"
+  | "violet"
+  | "amber"
+  | "emerald"
+  | "rose"
+  | "teal"
+  | "cyan"
+  | "indigo"
+  | "sky";
 
 interface AccentClasses {
   iconBg: string;
@@ -100,5 +109,29 @@ export const ACCENT_CLASSES: Record<AccentColor, AccentClasses> = {
     topBar: "bg-cyan-500",
     link: "text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300",
     dot: "bg-cyan-500",
+  },
+  indigo: {
+    iconBg: "bg-indigo-100 dark:bg-indigo-500/15",
+    iconText: "text-indigo-600 dark:text-indigo-400",
+    badgeBg: "bg-indigo-50 dark:bg-indigo-500/10",
+    badgeText: "text-indigo-700 dark:text-indigo-300",
+    badgeActiveRing: "ring-2 ring-indigo-500 dark:ring-indigo-400",
+    cardBorder: "border-indigo-100 dark:border-indigo-900/60",
+    cardHoverBorder: "hover:border-indigo-300 dark:hover:border-indigo-700",
+    topBar: "bg-indigo-500",
+    link: "text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300",
+    dot: "bg-indigo-500",
+  },
+  sky: {
+    iconBg: "bg-sky-100 dark:bg-sky-500/15",
+    iconText: "text-sky-600 dark:text-sky-400",
+    badgeBg: "bg-sky-50 dark:bg-sky-500/10",
+    badgeText: "text-sky-700 dark:text-sky-300",
+    badgeActiveRing: "ring-2 ring-sky-500 dark:ring-sky-400",
+    cardBorder: "border-sky-100 dark:border-sky-900/60",
+    cardHoverBorder: "hover:border-sky-300 dark:hover:border-sky-700",
+    topBar: "bg-sky-500",
+    link: "text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300",
+    dot: "bg-sky-500",
   },
 };
