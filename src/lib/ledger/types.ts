@@ -24,6 +24,16 @@ export interface FixedExpense {
   amount: number;
 }
 
+// 카드 할부처럼 "총액 ÷ 개월수"만큼 시작월부터 정해진 개월수 동안만 나가는 지출.
+// 영구히 반복되는 FixedExpense와 달리 개월수가 지나면 자동으로 지출 목록에서 빠진다.
+export interface InstallmentExpense {
+  id: string;
+  name: string;
+  totalAmount: number;
+  months: number;
+  startDate: string; // yyyy-mm-dd, 첫 결제월 기준
+}
+
 export interface Transaction {
   id: string;
   date: string; // yyyy-mm-dd
@@ -39,6 +49,7 @@ export interface LedgerSettings {
   monthlyBudget: number; // 0이면 미설정
   goalAmount: number; // 0이면 미설정. 목표 금액 달성까지 남은 개월 수 계산에 사용
   fixedExpenses: FixedExpense[];
+  installmentExpenses: InstallmentExpense[];
   // 4대보험료/퇴직금/주휴수당/연차수당 계산기 결과를 이 잔고 계산에 반영할지 여부.
   calculatorLinks: CalculatorLinkToggles;
 }
@@ -57,6 +68,7 @@ export function createDefaultLedgerData(): LedgerData {
       monthlyBudget: 0,
       goalAmount: 0,
       fixedExpenses: [],
+      installmentExpenses: [],
       calculatorLinks: createDefaultCalculatorLinkToggles(),
     },
     transactions: [],

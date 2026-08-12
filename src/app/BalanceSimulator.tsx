@@ -103,6 +103,8 @@ export function BalanceSimulator() {
         onUpdateSettings={ledger.updateSettings}
         onAddFixedExpense={ledger.addFixedExpense}
         onRemoveFixedExpense={ledger.removeFixedExpense}
+        onAddInstallmentExpense={ledger.addInstallmentExpense}
+        onRemoveInstallmentExpense={ledger.removeInstallmentExpense}
         calculatorLinkData={calculatorLinks.data}
         onToggleCalculatorLink={handleToggleCalculatorLink}
       />

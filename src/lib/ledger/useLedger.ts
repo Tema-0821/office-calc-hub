@@ -5,6 +5,7 @@ import { loadLedgerData, saveLedgerData } from "./storage";
 import {
   createDefaultLedgerData,
   type FixedExpense,
+  type InstallmentExpense,
   type LedgerData,
   type LedgerSettings,
   type Transaction,
@@ -53,6 +54,31 @@ export function useLedger() {
     }));
   }, []);
 
+  const addInstallmentExpense = useCallback((installment: Omit<InstallmentExpense, "id">) => {
+    setData((prev) => ({
+      ...prev,
+      settings: {
+        ...prev.settings,
+        installmentExpenses: [
+          ...prev.settings.installmentExpenses,
+          { ...installment, id: crypto.randomUUID() },
+        ],
+      },
+    }));
+  }, []);
+
+  const removeInstallmentExpense = useCallback((id: string) => {
+    setData((prev) => ({
+      ...prev,
+      settings: {
+        ...prev.settings,
+        installmentExpenses: prev.settings.installmentExpenses.filter(
+          (installment) => installment.id !== id
+        ),
+      },
+    }));
+  }, []);
+
   const addTransaction = useCallback((tx: Omit<Transaction, "id">) => {
     setData((prev) => ({
       ...prev,
@@ -80,6 +106,8 @@ export function useLedger() {
     updateSettings,
     addFixedExpense,
     removeFixedExpense,
+    addInstallmentExpense,
+    removeInstallmentExpense,
     addTransaction,
     removeTransaction,
     importTransactions,

@@ -1,4 +1,10 @@
-import { EXPENSE_CATEGORIES, type ExpenseCategory, type LedgerData, type Transaction } from "./types";
+import {
+  EXPENSE_CATEGORIES,
+  type ExpenseCategory,
+  type InstallmentExpense,
+  type LedgerData,
+  type Transaction,
+} from "./types";
 
 const MAX_HISTORY_MONTHS = 240; // 20년, 무한루프 방지용 안전장치
 
@@ -19,6 +25,32 @@ function isSameMonth(dateStr: string, year: number, month: number): boolean {
 
 function sumAmount(items: { amount: number }[]): number {
   return items.reduce((acc, item) => acc + item.amount, 0);
+}
+
+function monthIndex(year: number, month: number): number {
+  return year * 12 + (month - 1);
+}
+
+// 할부는 총액을 개월수로 나눠 매달 균등하게 나가되, 나눠떨어지지 않는 나머지는
+// 마지막 회차에 몰아 반영한다(카드사 할부 정산 방식과 동일).
+function getInstallmentMonthlyAmount(installment: InstallmentExpense, monthOffset: number): number {
+  const base = Math.floor(installment.totalAmount / installment.months);
+  const remainder = installment.totalAmount - base * installment.months;
+  const isLastInstallment = monthOffset === installment.months - 1;
+  return isLastInstallment ? base + remainder : base;
+}
+
+function getInstallmentTotal(
+  installments: InstallmentExpense[],
+  year: number,
+  month: number
+): number {
+  return installments.reduce((acc, installment) => {
+    const { year: startYear, month: startMonth } = parseYearMonth(installment.startDate);
+    const offset = monthIndex(year, month) - monthIndex(startYear, startMonth);
+    if (offset < 0 || offset >= installment.months) return acc;
+    return acc + getInstallmentMonthlyAmount(installment, offset);
+  }, 0);
 }
 
 export function getMonthTransactions(
@@ -57,6 +89,7 @@ export interface MonthSummary {
   month: number;
   income: number;
   fixedTotal: number;
+  installmentTotal: number;
   variableTotal: number;
   netChange: number;
   categoryTotals: Record<ExpenseCategory, number>;
@@ -69,6 +102,7 @@ export function getMonthSummary(
   adjustments: CalculatorAdjustments = EMPTY_ADJUSTMENTS
 ): MonthSummary {
   const fixedTotal = sumAmount(data.settings.fixedExpenses) + adjustments.recurringFixedExtra;
+  const installmentTotal = getInstallmentTotal(data.settings.installmentExpenses, year, month);
   const monthTransactions = getMonthTransactions(data.transactions, year, month);
   const variableTotal = sumAmount(monthTransactions);
   const oneTimeIncome = sumAmount(
@@ -81,8 +115,9 @@ export function getMonthSummary(
     month,
     income,
     fixedTotal,
+    installmentTotal,
     variableTotal,
-    netChange: income - fixedTotal - variableTotal,
+    netChange: income - fixedTotal - installmentTotal - variableTotal,
     categoryTotals: getCategoryTotals(monthTransactions),
   };
 }
@@ -153,7 +188,11 @@ export function getNextMonthProjection(
 
   const nextMonthSummary = getMonthSummary(data, nextYear, nextMonth, adjustments);
   const projectedVariable = dailyAvgVariable * daysInMonth(nextYear, nextMonth);
-  const projectedNetChange = nextMonthSummary.income - nextMonthSummary.fixedTotal - projectedVariable;
+  const projectedNetChange =
+    nextMonthSummary.income -
+    nextMonthSummary.fixedTotal -
+    nextMonthSummary.installmentTotal -
+    projectedVariable;
 
   return { dailyAvgVariable, projectedVariable, projectedNetChange, nextYear, nextMonth };
 }

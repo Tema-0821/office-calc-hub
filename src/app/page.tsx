@@ -12,7 +12,7 @@ export const metadata = buildMetadata({
 export default function Home() {
   return (
     <CalculatorLayout
-      title="잔고 시뮬레이터"
+      title="잔고 시뮬레이터 (가계부)"
       description="월급, 고정지출, 그날그날의 지출을 기록하면 매달 잔고가 얼마나 쌓이는지 보여줍니다."
       accent="rose"
       bare
