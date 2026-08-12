@@ -38,9 +38,12 @@ export function CalculatorLayout({
   // 단순 입력폼 계산기는 전체 폭까지 늘리면 입력칸만 휑하게 넓어져 어색해서,
   // 가운데 정렬한 좁은 폭으로 유지한다. bare 화면(잔고 시뮬레이터)만 전체 폭을 쓴다.
   const contentWidth = bare ? "" : "mx-auto max-w-2xl";
+  // bare 화면(잔고 시뮬레이터)은 왼쪽 카테고리 사이드바 + 오른쪽 계산기 연동 패널까지
+  // 함께 들어가야 해서 다른 계산기 페이지보다 더 넓은 폭을 쓴다.
+  const outerWidth = bare ? "max-w-7xl" : "max-w-5xl";
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-6 py-10">
+    <div className={`mx-auto w-full ${outerWidth} px-6 py-10`}>
       <div className="flex gap-8">
         <aside className="hidden w-44 shrink-0 md:block">
           <div className="sticky top-6">

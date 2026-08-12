@@ -36,5 +36,35 @@ export function buildAdjustments(
     });
   }
 
+  if (toggles.unemploymentBenefit && linkData.unemploymentBenefit) {
+    oneTimeIncomes.push({
+      year: linkData.unemploymentBenefit.year,
+      month: linkData.unemploymentBenefit.month,
+      amount: linkData.unemploymentBenefit.amount,
+    });
+  }
+
+  if (toggles.overtimePay && linkData.overtimePay) {
+    recurringIncomeExtra += linkData.overtimePay.monthlyIncome;
+  }
+
+  if (toggles.suspensionPay && linkData.suspensionPay) {
+    const today = new Date();
+    oneTimeIncomes.push({
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      amount: linkData.suspensionPay.amount,
+    });
+  }
+
+  if (toggles.dismissalNoticePay && linkData.dismissalNoticePay) {
+    const today = new Date();
+    oneTimeIncomes.push({
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      amount: linkData.dismissalNoticePay.amount,
+    });
+  }
+
   return { recurringFixedExtra, recurringIncomeExtra, oneTimeIncomes };
 }

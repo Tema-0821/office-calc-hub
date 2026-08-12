@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { CalculatorLinksSection } from "@/components/ledger/CalculatorLinksSection";
 import { CsvControls } from "@/components/ledger/CsvControls";
 import { CumulativeHistoryTable } from "@/components/ledger/CumulativeHistoryTable";
 import { LedgerCalendar } from "@/components/ledger/LedgerCalendar";
@@ -97,61 +98,69 @@ export function BalanceSimulator() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <SettingsPanel
-        settings={ledger.data.settings}
-        onUpdateSettings={ledger.updateSettings}
-        onAddFixedExpense={ledger.addFixedExpense}
-        onRemoveFixedExpense={ledger.removeFixedExpense}
-        onAddInstallmentExpense={ledger.addInstallmentExpense}
-        onRemoveInstallmentExpense={ledger.removeInstallmentExpense}
-        calculatorLinkData={calculatorLinks.data}
-        onToggleCalculatorLink={handleToggleCalculatorLink}
-      />
-
-      <div className="flex items-center justify-between">
-        <button
-          type="button"
-          onClick={goPrevMonth}
-          className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
-        >
-          ← 이전달
-        </button>
-        <h2 className="text-lg font-bold">
-          {viewYear}년 {viewMonth}월
-        </h2>
-        <button
-          type="button"
-          onClick={goNextMonth}
-          className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
-        >
-          다음달 →
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
-        <MonthSummaryCard
-          summary={summary}
-          budget={ledger.data.settings.monthlyBudget}
-          projection={projection}
-          cumulativeBalance={cumulativeBalance}
-          goalAmount={ledger.data.settings.goalAmount}
-          goal={goal}
+    <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
+      <div className="flex min-w-0 flex-1 flex-col gap-6">
+        <SettingsPanel
+          settings={ledger.data.settings}
+          onUpdateSettings={ledger.updateSettings}
+          onAddFixedExpense={ledger.addFixedExpense}
+          onRemoveFixedExpense={ledger.removeFixedExpense}
+          onAddInstallmentExpense={ledger.addInstallmentExpense}
+          onRemoveInstallmentExpense={ledger.removeInstallmentExpense}
         />
 
-        <LedgerCalendar
-          year={viewYear}
-          month={viewMonth}
-          transactions={monthTransactions}
-          onAddTransaction={ledger.addTransaction}
-        />
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            onClick={goPrevMonth}
+            className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          >
+            ← 이전달
+          </button>
+          <h2 className="text-lg font-bold">
+            {viewYear}년 {viewMonth}월
+          </h2>
+          <button
+            type="button"
+            onClick={goNextMonth}
+            className="rounded-lg border border-zinc-300 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          >
+            다음달 →
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
+          <MonthSummaryCard
+            summary={summary}
+            budget={ledger.data.settings.monthlyBudget}
+            projection={projection}
+            cumulativeBalance={cumulativeBalance}
+            goalAmount={ledger.data.settings.goalAmount}
+            goal={goal}
+          />
+
+          <LedgerCalendar
+            year={viewYear}
+            month={viewMonth}
+            transactions={monthTransactions}
+            onAddTransaction={ledger.addTransaction}
+          />
+        </div>
+
+        <TransactionList transactions={monthTransactions} onRemove={ledger.removeTransaction} />
+
+        <CumulativeHistoryTable history={history} />
+
+        <CsvControls transactions={ledger.data.transactions} onImport={ledger.importTransactions} />
       </div>
 
-      <TransactionList transactions={monthTransactions} onRemove={ledger.removeTransaction} />
-
-      <CumulativeHistoryTable history={history} />
-
-      <CsvControls transactions={ledger.data.transactions} onImport={ledger.importTransactions} />
+      <aside className="w-full shrink-0 lg:w-80">
+        <CalculatorLinksSection
+          toggles={ledger.data.settings.calculatorLinks}
+          linkData={calculatorLinks.data}
+          onToggle={handleToggleCalculatorLink}
+        />
+      </aside>
     </div>
   );
 }

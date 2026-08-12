@@ -4,9 +4,7 @@ import { useState } from "react";
 import { DateField } from "@/components/calculators/DateField";
 import { NumberField } from "@/components/calculators/NumberField";
 import { formatWonKorean } from "@/lib/format";
-import type { CalculatorLinkToggles, CalculatorLinksData } from "@/lib/calculatorLinks/types";
 import type { FixedExpense, InstallmentExpense, LedgerSettings } from "@/lib/ledger/types";
-import { CalculatorLinksSection } from "./CalculatorLinksSection";
 
 interface SettingsPanelProps {
   settings: LedgerSettings;
@@ -15,8 +13,6 @@ interface SettingsPanelProps {
   onRemoveFixedExpense: (id: string) => void;
   onAddInstallmentExpense: (installment: Omit<InstallmentExpense, "id">) => void;
   onRemoveInstallmentExpense: (id: string) => void;
-  calculatorLinkData: CalculatorLinksData;
-  onToggleCalculatorLink: (key: keyof CalculatorLinkToggles, value: boolean) => void;
 }
 
 function getDefaultToday(): string {
@@ -38,8 +34,6 @@ export function SettingsPanel({
   onRemoveFixedExpense,
   onAddInstallmentExpense,
   onRemoveInstallmentExpense,
-  calculatorLinkData,
-  onToggleCalculatorLink,
 }: SettingsPanelProps) {
   const [newExpenseName, setNewExpenseName] = useState("");
   const [newExpenseAmount, setNewExpenseAmount] = useState(0);
@@ -263,12 +257,6 @@ export function SettingsPanel({
           </p>
         )}
       </div>
-
-      <CalculatorLinksSection
-        toggles={settings.calculatorLinks}
-        linkData={calculatorLinkData}
-        onToggle={onToggleCalculatorLink}
-      />
     </div>
   );
 }
