@@ -1,11 +1,12 @@
 import type { AccentColor } from "@/lib/theme";
 
-export type CalculatorCategory = "salary" | "budget" | "life";
+export type CalculatorCategory = "salary" | "budget" | "life" | "tax";
 
 export const CALCULATOR_CATEGORIES: Record<CalculatorCategory, string> = {
   salary: "급여·근로 계산기",
   budget: "가계부 도구",
   life: "생활 계산기",
+  tax: "세금 계산기",
 };
 
 export interface CalculatorMeta {
@@ -79,5 +80,15 @@ export const CALCULATORS: CalculatorMeta[] = [
     icon: "🎂",
     accent: "teal",
     category: "life",
+  },
+  {
+    slug: "vat",
+    href: "/vat",
+    title: "부가가치세 계산기",
+    shortTitle: "부가가치세",
+    description: "금액에 부가세가 포함됐는지 별도인지에 따라 공급가액·부가세·합계금액을 계산해줘요.",
+    icon: "🧾",
+    accent: "cyan",
+    category: "tax",
   },
 ];
