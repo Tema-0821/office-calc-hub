@@ -10,7 +10,7 @@ export const metadata = buildMetadata({
 
 export default function FeedbackPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl px-6 py-10">
+    <div className="mx-auto w-full max-w-2xl px-6 py-10">
       <Link href="/" className="text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100">
         ← 홈
       </Link>

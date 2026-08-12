@@ -8,7 +8,7 @@ export const metadata = buildMetadata({
 
 export default function PrivacyPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl px-6 py-12">
+    <div className="mx-auto w-full max-w-2xl px-6 py-12">
       <h1 className="text-2xl font-bold tracking-tight">개인정보처리방침</h1>
       <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">최종 수정일: 2026년 8월 8일</p>
 

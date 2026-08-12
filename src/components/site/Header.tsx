@@ -11,7 +11,7 @@ export function Header() {
 
   return (
     <header className="border-b border-zinc-200 bg-gradient-to-r from-blue-50 via-violet-50 to-rose-50 dark:border-zinc-800 dark:from-blue-950/30 dark:via-violet-950/20 dark:to-rose-950/30">
-      <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Link href="/" className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
           직장인 계산기 허브
         </Link>
@@ -25,7 +25,7 @@ export function Header() {
           <ThemeToggle />
         </div>
       </div>
-      <nav className="mx-auto max-w-3xl overflow-x-auto px-6 pt-1 pb-3">
+      <nav className="mx-auto max-w-5xl overflow-x-auto px-6 pt-1 pb-3">
         <ul className="flex gap-2">
           {CALCULATORS.map((calc) => {
             const accent = ACCENT_CLASSES[calc.accent];
