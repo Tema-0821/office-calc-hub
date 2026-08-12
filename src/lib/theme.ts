@@ -7,7 +7,13 @@ export type AccentColor =
   | "teal"
   | "cyan"
   | "indigo"
-  | "sky";
+  | "sky"
+  | "lime"
+  | "fuchsia"
+  | "orange"
+  | "pink"
+  | "purple"
+  | "yellow";
 
 interface AccentClasses {
   iconBg: string;
@@ -133,5 +139,77 @@ export const ACCENT_CLASSES: Record<AccentColor, AccentClasses> = {
     topBar: "bg-sky-500",
     link: "text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300",
     dot: "bg-sky-500",
+  },
+  lime: {
+    iconBg: "bg-lime-100 dark:bg-lime-500/15",
+    iconText: "text-lime-600 dark:text-lime-400",
+    badgeBg: "bg-lime-50 dark:bg-lime-500/10",
+    badgeText: "text-lime-700 dark:text-lime-300",
+    badgeActiveRing: "ring-2 ring-lime-500 dark:ring-lime-400",
+    cardBorder: "border-lime-100 dark:border-lime-900/60",
+    cardHoverBorder: "hover:border-lime-300 dark:hover:border-lime-700",
+    topBar: "bg-lime-500",
+    link: "text-lime-600 dark:text-lime-400 hover:text-lime-700 dark:hover:text-lime-300",
+    dot: "bg-lime-500",
+  },
+  fuchsia: {
+    iconBg: "bg-fuchsia-100 dark:bg-fuchsia-500/15",
+    iconText: "text-fuchsia-600 dark:text-fuchsia-400",
+    badgeBg: "bg-fuchsia-50 dark:bg-fuchsia-500/10",
+    badgeText: "text-fuchsia-700 dark:text-fuchsia-300",
+    badgeActiveRing: "ring-2 ring-fuchsia-500 dark:ring-fuchsia-400",
+    cardBorder: "border-fuchsia-100 dark:border-fuchsia-900/60",
+    cardHoverBorder: "hover:border-fuchsia-300 dark:hover:border-fuchsia-700",
+    topBar: "bg-fuchsia-500",
+    link: "text-fuchsia-600 dark:text-fuchsia-400 hover:text-fuchsia-700 dark:hover:text-fuchsia-300",
+    dot: "bg-fuchsia-500",
+  },
+  orange: {
+    iconBg: "bg-orange-100 dark:bg-orange-500/15",
+    iconText: "text-orange-600 dark:text-orange-400",
+    badgeBg: "bg-orange-50 dark:bg-orange-500/10",
+    badgeText: "text-orange-700 dark:text-orange-300",
+    badgeActiveRing: "ring-2 ring-orange-500 dark:ring-orange-400",
+    cardBorder: "border-orange-100 dark:border-orange-900/60",
+    cardHoverBorder: "hover:border-orange-300 dark:hover:border-orange-700",
+    topBar: "bg-orange-500",
+    link: "text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300",
+    dot: "bg-orange-500",
+  },
+  pink: {
+    iconBg: "bg-pink-100 dark:bg-pink-500/15",
+    iconText: "text-pink-600 dark:text-pink-400",
+    badgeBg: "bg-pink-50 dark:bg-pink-500/10",
+    badgeText: "text-pink-700 dark:text-pink-300",
+    badgeActiveRing: "ring-2 ring-pink-500 dark:ring-pink-400",
+    cardBorder: "border-pink-100 dark:border-pink-900/60",
+    cardHoverBorder: "hover:border-pink-300 dark:hover:border-pink-700",
+    topBar: "bg-pink-500",
+    link: "text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300",
+    dot: "bg-pink-500",
+  },
+  purple: {
+    iconBg: "bg-purple-100 dark:bg-purple-500/15",
+    iconText: "text-purple-600 dark:text-purple-400",
+    badgeBg: "bg-purple-50 dark:bg-purple-500/10",
+    badgeText: "text-purple-700 dark:text-purple-300",
+    badgeActiveRing: "ring-2 ring-purple-500 dark:ring-purple-400",
+    cardBorder: "border-purple-100 dark:border-purple-900/60",
+    cardHoverBorder: "hover:border-purple-300 dark:hover:border-purple-700",
+    topBar: "bg-purple-500",
+    link: "text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300",
+    dot: "bg-purple-500",
+  },
+  yellow: {
+    iconBg: "bg-yellow-100 dark:bg-yellow-500/15",
+    iconText: "text-yellow-600 dark:text-yellow-400",
+    badgeBg: "bg-yellow-50 dark:bg-yellow-500/10",
+    badgeText: "text-yellow-700 dark:text-yellow-300",
+    badgeActiveRing: "ring-2 ring-yellow-500 dark:ring-yellow-400",
+    cardBorder: "border-yellow-100 dark:border-yellow-900/60",
+    cardHoverBorder: "hover:border-yellow-300 dark:hover:border-yellow-700",
+    topBar: "bg-yellow-500",
+    link: "text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300",
+    dot: "bg-yellow-500",
   },
 };

@@ -7,4 +7,10 @@ export const CALCULATOR_INPUT_KEYS = {
   vat: "office-calc-hub:calc-input:vat",
   salaryConverter: "office-calc-hub:calc-input:salary-converter",
   unemploymentBenefit: "office-calc-hub:calc-input:unemployment-benefit",
+  hourlyWage: "office-calc-hub:calc-input:hourly-wage",
+  minimumWage: "office-calc-hub:calc-input:minimum-wage",
+  overtimePay: "office-calc-hub:calc-input:overtime-pay",
+  annualLeaveDays: "office-calc-hub:calc-input:annual-leave-days",
+  suspensionPay: "office-calc-hub:calc-input:suspension-pay",
+  dismissalNoticePay: "office-calc-hub:calc-input:dismissal-notice-pay",
 } as const;
