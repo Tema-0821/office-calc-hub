@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { GoogleAnalytics } from "@/components/site/GoogleAnalytics";
 import { InlineScript } from "@/components/site/InlineScript";
 import { SITE_URL } from "@/lib/config";
 import { SITE_NAME } from "@/lib/seo";
@@ -72,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <GoogleAnalytics />
       </body>
     </html>
   );
