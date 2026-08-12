@@ -12,7 +12,7 @@ export function Header() {
 
   return (
     <header className="border-b border-zinc-200 bg-gradient-to-r from-blue-50 via-violet-50 to-rose-50 dark:border-zinc-800 dark:from-blue-950/30 dark:via-violet-950/20 dark:to-rose-950/30">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-[1536px] items-center justify-between px-6 py-4">
         <Link href="/" className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
           {SITE_NAME}
         </Link>
@@ -28,7 +28,7 @@ export function Header() {
       </div>
 
       {/* 데스크톱: 카테고리 버튼에 마우스를 올리면 해당 카테고리 계산기 목록이 드롭다운으로 펼쳐진다. */}
-      <nav className="mx-auto hidden max-w-7xl px-6 pb-3 pt-1 md:block">
+      <nav className="mx-auto hidden max-w-[1536px] px-6 pb-3 pt-1 md:block">
         <ul className="flex gap-1">
           {CATEGORY_ORDER.map((category) => {
             const items = CALCULATORS.filter((calc) => calc.category === category);
@@ -79,7 +79,7 @@ export function Header() {
       </nav>
 
       {/* 모바일: 호버 드롭다운을 쓸 수 없어 기존처럼 가로 스크롤 pill 목록을 그대로 쓴다. */}
-      <nav className="mx-auto max-w-7xl overflow-x-auto px-6 pt-1 pb-3 md:hidden">
+      <nav className="mx-auto max-w-[1536px] overflow-x-auto px-6 pt-1 pb-3 md:hidden">
         <ul className="flex gap-2">
           {CALCULATORS.map((calc) => {
             const accent = ACCENT_CLASSES[calc.accent];
