@@ -18,11 +18,15 @@ export function calculateKoreanAge(birthDateStr: string, referenceDateStr: strin
 
   const hasHadBirthdayThisYear =
     reference.month > birth.month || (reference.month === birth.month && reference.day >= birth.day);
+  // 다음 생일까지 남은 일수 계산에는 "이미 지남" 조건을 엄격한 초과(>)로 판단해서,
+  // 오늘이 생일이면 다음 생일이 내년이 아니라 오늘(0일 남음)이 되도록 한다.
+  const hasBirthdayStrictlyPassedThisYear =
+    reference.month > birth.month || (reference.month === birth.month && reference.day > birth.day);
 
   const internationalAge = reference.year - birth.year - (hasHadBirthdayThisYear ? 0 : 1);
   const yearAge = reference.year - birth.year;
 
-  const nextBirthdayYear = hasHadBirthdayThisYear ? reference.year + 1 : reference.year;
+  const nextBirthdayYear = hasBirthdayStrictlyPassedThisYear ? reference.year + 1 : reference.year;
   const nextBirthday = new Date(nextBirthdayYear, birth.month - 1, birth.day);
   const referenceDate = new Date(reference.year, reference.month - 1, reference.day);
   const daysUntilNextBirthday = Math.round(
