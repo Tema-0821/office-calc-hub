@@ -17,13 +17,42 @@ export default function Page() {
       guide={
         <>
           <p>
-            근로기준법 제60조에 따라 <strong>계속근로기간 1년 미만</strong>인 근로자는 1개월
-            개근 시 1일씩, 최대 11일까지 연차가 발생합니다.
+            연차는 입사와 동시에 한꺼번에 생기는 게 아니라 근속기간에 따라 단계적으로 쌓입니다.
+            근로기준법 제60조 기준으로 정리하면 다음과 같습니다.
           </p>
-          <p>
-            <strong>계속근로기간 1년 이상</strong>(1년간 80% 이상 출근)인 근로자는 15일이
-            발생하고, 이후 <strong>매 2년마다 1일씩 가산</strong>되어 최대 25일까지 늘어납니다.
-          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[320px] text-left text-xs">
+              <thead>
+                <tr className="border-b border-zinc-200 text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+                  <th className="py-1.5 pr-2 font-medium">근속기간</th>
+                  <th className="py-1.5 font-medium">발생 연차</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                <tr>
+                  <td className="py-1.5 pr-2">1년 미만</td>
+                  <td className="py-1.5">매월 개근 시 1일씩 (최대 11일)</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">1~2년</td>
+                  <td className="py-1.5">15일</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">3~4년</td>
+                  <td className="py-1.5">16일</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">5~6년</td>
+                  <td className="py-1.5">17일</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">21년 이상</td>
+                  <td className="py-1.5">25일 (상한)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>3년차부터는 2년마다 1일씩 가산되어 최대 25일까지 늘어납니다.</p>
           <p>
             발생한 연차를 실제로 얼마 받을 수 있는지 금액으로 확인하고 싶다면 연차수당 계산기를
             함께 사용해보세요.

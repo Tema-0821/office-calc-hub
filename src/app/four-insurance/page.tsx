@@ -18,10 +18,44 @@ export default function Page() {
       guide={
         <>
           <p>
-            4대보험료는 국민연금, 건강보험, 장기요양보험, 고용보험 네 가지로 구성되며, 원칙적으로
-            근로자와 사업주가 절반씩 부담합니다. 이 계산기는 근로자가 실제로 월급에서 공제받는 금액만
-            보여줍니다.
+            급여명세서 공제 항목에 국민연금, 건강보험, 장기요양보험, 고용보험이 나란히 찍혀
+            있는데, 이 넷을 통틀어 &ldquo;4대보험&rdquo;이라고 부릅니다. 원칙적으로 근로자와
+            사업주가 절반씩 부담하고, 이 계산기는 그중 근로자 몫만 보여줍니다.
           </p>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[380px] text-left text-xs">
+              <thead>
+                <tr className="border-b border-zinc-200 text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+                  <th className="py-1.5 pr-2 font-medium">항목</th>
+                  <th className="py-1.5 pr-2 font-medium">전체 요율</th>
+                  <th className="py-1.5 font-medium">근로자 부담</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                <tr>
+                  <td className="py-1.5 pr-2">국민연금</td>
+                  <td className="py-1.5 pr-2">9.5%</td>
+                  <td className="py-1.5">4.75%</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">건강보험</td>
+                  <td className="py-1.5 pr-2">7.19%</td>
+                  <td className="py-1.5">3.595%</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">장기요양보험</td>
+                  <td className="py-1.5 pr-2" colSpan={2}>
+                    건강보험료의 약 12.95%
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">고용보험(실업급여분)</td>
+                  <td className="py-1.5 pr-2">0.9%</td>
+                  <td className="py-1.5">0.45%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <p>
             <strong>국민연금</strong>은 기준소득월액에 상한액과 하한액이 있어, 월급이 매우 높거나 낮으면
             실제 급여가 아닌 상한·하한 기준으로 계산됩니다.

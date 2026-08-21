@@ -17,13 +17,39 @@ export default function Page() {
       guide={
         <>
           <p>
-            2026년 최저시급은 <strong>10,320원</strong>입니다. 시급뿐 아니라 월급으로 받는 경우도
-            시급으로 환산했을 때 최저시급 이상이어야 합니다.
+            &ldquo;최저시급 이상만 주면 문제없다&rdquo;고 생각하기 쉽지만, 월급으로 받는
+            경우에도 시급으로 환산했을 때 기준을 넘어야 합니다. 2026년 최저시급은{" "}
+            <strong>10,320원</strong>이며, 최저임금위원회가 매년 심의해 고용노동부 장관이 고시하고
+            1월 1일부터 새 금액이 적용됩니다.
           </p>
-          <p>
-            최저임금은 최저임금위원회가 매년 심의해 고용노동부 장관이 고시하며, 매년 1월 1일부터
-            새 금액이 적용됩니다.
-          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[320px] text-left text-xs">
+              <thead>
+                <tr className="border-b border-zinc-200 text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+                  <th className="py-1.5 pr-2 font-medium">기준</th>
+                  <th className="py-1.5 font-medium">2026년 최저 금액</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                <tr>
+                  <td className="py-1.5 pr-2">시급</td>
+                  <td className="py-1.5">10,320원</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">일급 (8시간)</td>
+                  <td className="py-1.5">82,560원</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">주급 (주휴 포함 48시간)</td>
+                  <td className="py-1.5">495,360원</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">월급 (209시간)</td>
+                  <td className="py-1.5">2,156,880원</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <p>
             <strong>계산 예시</strong>: 2026년 최저시급 10,320원을 기준으로 하면, 하루 8시간
             근무 시 최저 일급은 10,320원 × 8 = 82,560원, 주휴수당을 포함한 주 48시간 기준 최저

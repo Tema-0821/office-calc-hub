@@ -17,14 +17,39 @@ export default function Page() {
       guide={
         <>
           <p>
-            근로기준법 제56조에 따라 <strong>연장근로</strong>(1일 8시간·1주 40시간 초과)와{" "}
-            <strong>휴일근로</strong>(8시간 이내)는 통상임금의 <strong>50%</strong>를 가산해서
-            지급해야 합니다.
+            정해진 시간 외에 더 일했다면 시급을 그대로 받는 게 아니라 <strong>가산율</strong>이
+            붙습니다. 근로기준법 제56조가 정한 가산율은 근로 유형에 따라 다릅니다.
           </p>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[380px] text-left text-xs">
+              <thead>
+                <tr className="border-b border-zinc-200 text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+                  <th className="py-1.5 pr-2 font-medium">근로 유형</th>
+                  <th className="py-1.5 font-medium">가산율</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                <tr>
+                  <td className="py-1.5 pr-2">연장근로 (1일 8시간·1주 40시간 초과)</td>
+                  <td className="py-1.5">+50%</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">야간근로 (오후 10시~오전 6시)</td>
+                  <td className="py-1.5">+50%</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">휴일근로 (8시간 이내)</td>
+                  <td className="py-1.5">+50%</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">휴일근로 (8시간 초과분)</td>
+                  <td className="py-1.5">+100%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <p>
-            <strong>휴일근로가 8시간을 초과</strong>하면 그 초과분은 통상임금의{" "}
-            <strong>100%</strong>를 가산합니다. <strong>야간근로</strong>(오후 10시~오전 6시)는
-            별도로 통상임금의 50%를 가산합니다.
+            같은 시간이 연장근로이면서 동시에 야간근로에도 해당하면 두 가산율이 중복 적용됩니다.
           </p>
           <p>
             5인 미만 사업장은 근로기준법상 연장·야간·휴일 가산수당 규정이 적용되지 않을 수
