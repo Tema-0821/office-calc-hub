@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { FaqSection } from "@/components/calculators/FaqSection";
 import { CalculatorDirectory } from "@/components/home/CalculatorDirectory";
+import { GUIDES } from "@/lib/guides";
 import { buildMetadata, SITE_NAME } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -54,6 +56,27 @@ export default function Home() {
             빠르게 가늠하는 참고용 도구로 활용하시고, 정확한 금액은 회사 인사·급여 담당자나
             국민연금공단·근로복지공단 같은 관련 기관을 통해 확인하시길 권합니다.
           </p>
+        </div>
+      </section>
+
+      <section className="mt-10 border-t border-zinc-200 pt-8 dark:border-zinc-800">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">가이드</h2>
+          <Link href="/guides" className="text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100">
+            전체 보기 →
+          </Link>
+        </div>
+        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {GUIDES.map((guide) => (
+            <Link
+              key={guide.slug}
+              href={`/guides/${guide.slug}`}
+              className="rounded-xl border border-zinc-200 bg-white p-4 text-sm transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+            >
+              <span className="font-medium text-zinc-900 dark:text-zinc-50">{guide.title}</span>
+              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{guide.description}</p>
+            </Link>
+          ))}
         </div>
       </section>
 

@@ -9,7 +9,13 @@ export function Footer() {
           모든 계산 결과는 참고용이며 법적 효력이 없습니다. 정확한 금액은 관련 공공기관(국민연금공단,
           국민건강보험공단, 고용노동부 등)의 공식 정보를 통해 확인하세요.
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
+          <Link href="/about" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+            사이트 소개
+          </Link>
+          <Link href="/guides" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+            가이드
+          </Link>
           <Link href="/privacy" className="hover:text-zinc-900 dark:hover:text-zinc-100">
             개인정보처리방침
           </Link>
